@@ -28,7 +28,7 @@ export const extractPrologStatement = (
   return `${operation}(${prologRule}).`;
 };
 
-export const isStatementValidProlog = async (
+export const isStringValidTerm = async (
   statement: string,
 ): Promise<boolean> => {
   const swiplEngine: any = await SWIPL({ arguments: ["-q"] });

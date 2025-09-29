@@ -1,1 +1,1 @@
-export { extractPrologStatement, isStatementValidProlog } from "./tools.js";
+export { extractPrologStatement, isStringValidTerm } from "./tools.js";

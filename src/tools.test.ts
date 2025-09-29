@@ -1,5 +1,5 @@
-import { extractPrologStatement, isStatementValidProlog } from "./tools.js";
-import { test, describe, expect, beforeAll, vi } from "vitest";
+import { extractPrologStatement, isStringValidTerm } from "./tools.js";
+import { test, describe, expect } from "vitest";
 
 describe("extractPrologStatement", () => {
   const prolog = "likes(alice, pizza)";
@@ -59,7 +59,7 @@ describe("isStatementValidProlog", () => {
     test.each(validCases)(
       "returns true for valid statement: %s",
       async (statement) => {
-        expect(await isStatementValidProlog(statement)).toBe(true);
+        expect(await isStringValidTerm(statement)).toBe(true);
       },
     );
   });
@@ -68,7 +68,7 @@ describe("isStatementValidProlog", () => {
     test.each(invalidCases)(
       "returns false for invalid statement: %s",
       async (statement) => {
-        expect(await isStatementValidProlog(statement)).toBe(false);
+        expect(await isStringValidTerm(statement)).toBe(false);
       },
     );
   });
