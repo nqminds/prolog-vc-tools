@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 1.2.2
+
+### Patch Changes
+
+- 06c6c8e: Update test categorisation
+
 ## 1.2.1
 
 ### Patch Changes
