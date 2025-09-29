@@ -1,127 +1,62 @@
 import { extractPrologStatement, isStatementValidProlog } from "./tools.js";
-import { test, expect } from "vitest";
+import { test, describe, expect, beforeAll } from "vitest";
 import SWIPL from "swipl-wasm";
 
-test("extractPrologStatement wraps prolog in assert(...) when operation is assert", () => {
-  const vc = {
-    credentialSubject: {
-      operation: "assert",
-      prolog: "likes(alice, pizza)",
-    },
-  };
+describe("Extract Prolog Statement", () => {
+  const prolog = "likes(alice, pizza)";
 
-  const result = extractPrologStatement(vc);
-  expect(result).toBe("assert(likes(alice, pizza)).");
-});
-test("extractPrologStatement wraps prolog in asserta(...) when operation is asserta", () => {
-  const vc = {
-    credentialSubject: {
-      operation: "asserta",
-      prolog: "likes(alice, pizza)",
-    },
-  };
+  test.each([
+    ["assert", "assert(likes(alice, pizza))."],
+    ["asserta", "asserta(likes(alice, pizza))."],
+    ["assertz", "assertz(likes(alice, pizza))."],
+    ["retract", "retract(likes(alice, pizza))."],
+    ["retractall", "retractall(likes(alice, pizza))."],
+    ["abolish", "abolish(likes(alice, pizza))."],
+  ])("wraps prolog in %s(...)", (operation, expected) => {
+    const vc = { credentialSubject: { operation, prolog } };
+    expect(extractPrologStatement(vc)).toBe(expected);
+  });
 
-  const result = extractPrologStatement(vc);
-  expect(result).toBe("asserta(likes(alice, pizza)).");
-});
+  test("returns null when schema is missing prolog", () => {
+    const vc = { credentialSubject: { operation: "assert" } };
+    expect(extractPrologStatement(vc)).toBeNull();
+  });
 
-test("extractPrologStatement wraps prolog in assertz(...) when operation is assertz", () => {
-  const vc = {
-    credentialSubject: {
-      operation: "assert",
-      prolog: "likes(alice, pizza)",
-    },
-  };
-
-  const result = extractPrologStatement(vc);
-  expect(result).toBe("assert(likes(alice, pizza)).");
+  test("returns null when operation is invalid", () => {
+    const vc = {
+      credentialSubject: { operation: "delete", prolog: "parent(john, mary)." },
+    };
+    expect(extractPrologStatement(vc)).toBeNull();
+  });
 });
 
-test("extractPrologStatement wraps prolog in retract(...) when operation is retract", () => {
-  const vc = {
-    credentialSubject: {
-      operation: "retract",
-      prolog: "likes(alice, pizza)",
-    },
-  };
+describe("Is Statement Valid Prolog", () => {
+  const valid = "assert(parent(john, mary)).";
+  const invalid = "assert(parent((john, mary)).";
 
-  const result = extractPrologStatement(vc);
-  expect(result).toBe("retract(likes(alice, pizza)).");
-});
+  describe("with owned engine", () => {
+    let swiplEngine: any;
 
-test("extractPrologStatement wraps prolog in retractall(...) when operation is retractall", () => {
-  const vc = {
-    credentialSubject: {
-      operation: "retractall",
-      prolog: "likes(alice, pizza)",
-    },
-  };
+    beforeAll(async () => {
+      swiplEngine = await SWIPL({ arguments: ["-q"] });
+    });
 
-  const result = extractPrologStatement(vc);
-  expect(result).toBe("retractall(likes(alice, pizza)).");
-});
+    test("returns true for valid statement", async () => {
+      expect(await isStatementValidProlog(valid, swiplEngine)).toBe(true);
+    });
 
-test("extractPrologStatement wraps prolog in abolish(...) when operation is abolish", () => {
-  const vc = {
-    credentialSubject: {
-      operation: "abolish",
-      prolog: "likes(alice, pizza)",
-    },
-  };
+    test("returns false for invalid statement", async () => {
+      expect(await isStatementValidProlog(invalid, swiplEngine)).toBe(false);
+    });
+  });
 
-  const result = extractPrologStatement(vc);
-  expect(result).toBe("abolish(likes(alice, pizza)).");
-});
+  describe("with unowned engine", () => {
+    test("returns true for valid statement", async () => {
+      expect(await isStatementValidProlog(valid)).toBe(true);
+    });
 
-test("extractPrologStatement returns null when schema is missing prolog", () => {
-  const vc = {
-    credentialSubject: {
-      operation: "assert",
-    },
-  };
-
-  const result = extractPrologStatement(vc);
-  expect(result).toBeNull();
-});
-
-test("extractPrologStatement returns null when operation is invalid", () => {
-  const vc = {
-    credentialSubject: {
-      operation: "delete", // not allowed
-      prolog: "parent(john, mary).",
-    },
-  };
-
-  const result = extractPrologStatement(vc);
-  expect(result).toBeNull();
-});
-
-test("isStatementValidProlog returns true for valid statement with owned engine", async () => {
-  const swiplEngine = await SWIPL({ arguments: ["-q"] });
-  const statement = "assert(parent(john, mary)).";
-
-  const isValid = await isStatementValidProlog(statement, swiplEngine);
-  expect(isValid).toBe(true);
-});
-
-test("isStatementValidProlog returns false for invalid statement with owned engine", async () => {
-  const swiplEngine = await SWIPL({ arguments: ["-q"] });
-  const statement = "assert(parent((john, mary)).";
-
-  const isValid = await isStatementValidProlog(statement, swiplEngine);
-  expect(isValid).toBe(false);
-});
-
-test("isStatementValidProlog returns true for valid statement with unowned engine", async () => {
-  const statement = "assert(parent(john, mary)).";
-
-  const isValid = await isStatementValidProlog(statement);
-  expect(isValid).toBe(true);
-});
-
-test("isStatementValidProlog returns false for invalid statement with unowned engine", async () => {
-  const statement = "assert(parent((john, mary)).";
-
-  const isValid = await isStatementValidProlog(statement);
-  expect(isValid).toBe(false);
+    test("returns false for invalid statement", async () => {
+      expect(await isStatementValidProlog(invalid)).toBe(false);
+    });
+  });
 });
