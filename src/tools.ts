@@ -2,7 +2,6 @@ import PrologStatementJSONSchema from "./schemas/PrologStatementCredentialSubjec
 import { Ajv } from "ajv";
 import { type PrologStatementCredentialSubject } from "./types/PrologStatementCredentialSubject.types.js";
 import SWIPL from "swipl-wasm";
-export const add = (a: number, b: number) => a + b;
 
 export const extractPrologStatement = (
   verifiableCredential: any,
@@ -26,11 +25,7 @@ export const extractPrologStatement = (
   const prologRule: string = credentialSubjectTyped.prolog;
 
   const operation: string = credentialSubjectTyped.operation;
-  if (operation && operation === "assert") {
-    return `assert(${prologRule}).`;
-  }
-
-  return prologRule;
+  return `${operation}(${prologRule}).`;
 };
 export const isStatementValidProlog = async (
   statement: string,

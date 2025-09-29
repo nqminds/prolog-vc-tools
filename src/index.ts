@@ -1,1 +1,1 @@
-export { add } from "./tools.js";
+export { extractPrologStatement, isStatementValidProlog } from "./tools.js";
