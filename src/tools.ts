@@ -33,7 +33,7 @@ export const isStatementValidProlog = async (
 ): Promise<boolean> => {
   // Instantiate SWI-Prolog engine if not already initialized
   if (!swiplEngine) {
-    swiplEngine = await SWIPL();
+    swiplEngine = await SWIPL({ arguments: ["-q"] });
   }
 
   try {

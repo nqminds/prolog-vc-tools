@@ -97,7 +97,7 @@ test("extractPrologStatement returns null when operation is invalid", () => {
 });
 
 test("isStatementValidProlog returns true for valid statement with owned engine", async () => {
-  const swiplEngine = await SWIPL();
+  const swiplEngine = await SWIPL({ arguments: ["-q"] });
   const statement = "assert(parent(john, mary)).";
 
   const isValid = await isStatementValidProlog(statement, swiplEngine);
@@ -105,7 +105,7 @@ test("isStatementValidProlog returns true for valid statement with owned engine"
 });
 
 test("isStatementValidProlog returns false for invalid statement with owned engine", async () => {
-  const swiplEngine = await SWIPL();
+  const swiplEngine = await SWIPL({ arguments: ["-q"] });
   const statement = "assert(parent((john, mary)).";
 
   const isValid = await isStatementValidProlog(statement, swiplEngine);
