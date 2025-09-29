@@ -1,6 +1,6 @@
 {
   "name": "prolog-vc-tools",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Provides helper tools for using VCs containing Prolog rules.",
   "license": "ISC",
   "author": "Henry Pearson <henry@nquiringminds.com> (https://nquiringminds.com)",
