@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 1.2.1
+
+### Patch Changes
+
+- aabc66a: Make SWIPL engine initialisations quiet
+
 ## 1.2.0
 
 ### Minor Changes
