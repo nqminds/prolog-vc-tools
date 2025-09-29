@@ -29,12 +29,9 @@ export const extractPrologStatement = (
 };
 export const isStatementValidProlog = async (
   statement: string,
-  swiplEngine?: any,
 ): Promise<boolean> => {
   // Instantiate SWI-Prolog engine if not already initialized
-  if (!swiplEngine) {
-    swiplEngine = await SWIPL({ arguments: ["-q"] });
-  }
+  const swiplEngine: any = await SWIPL({ arguments: ["-q"] });
 
   try {
     // Define the check_syntax predicate in Prolog

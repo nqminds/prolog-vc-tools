@@ -1,6 +1,5 @@
 import { extractPrologStatement, isStatementValidProlog } from "./tools.js";
 import { test, describe, expect, beforeAll, vi } from "vitest";
-import SWIPL from "swipl-wasm";
 
 describe("extractPrologStatement", () => {
   const prolog = "likes(alice, pizza)";
@@ -40,22 +39,6 @@ describe("isStatementValidProlog", () => {
   const valid = "assert(parent(john, mary)).";
   const invalid = "assert(parent((john, mary)).";
 
-  describe("with owned engine", () => {
-    let swiplEngine: any;
-
-    beforeAll(async () => {
-      swiplEngine = await SWIPL({ arguments: ["-q"] });
-    });
-
-    test("returns true for valid statement", async () => {
-      expect(await isStatementValidProlog(valid, swiplEngine)).toBe(true);
-    });
-
-    test("returns false for invalid statement", async () => {
-      expect(await isStatementValidProlog(invalid, swiplEngine)).toBe(false);
-    });
-  });
-
   describe("with unowned engine", () => {
     test("returns true for valid statement", async () => {
       expect(await isStatementValidProlog(valid)).toBe(true);
@@ -63,33 +46,6 @@ describe("isStatementValidProlog", () => {
 
     test("returns false for invalid statement", async () => {
       expect(await isStatementValidProlog(invalid)).toBe(false);
-    });
-  });
-
-  describe("error handling", () => {
-    test("logs error and returns false when engine throws", async () => {
-      const fakeEngine = {
-        prolog: {
-          query: () => {
-            throw new Error("Simulated engine failure");
-          },
-        },
-      };
-
-      const spy = vi.spyOn(console, "error").mockImplementation(() => {});
-
-      const result = await isStatementValidProlog(
-        "assert(broken).",
-        fakeEngine,
-      );
-
-      expect(result).toBe(false);
-      expect(spy).toHaveBeenCalledWith(
-        "Error during Prolog syntax check:",
-        expect.any(Error),
-      );
-
-      spy.mockRestore();
     });
   });
 });
