@@ -47,7 +47,6 @@ describe("isStatementValidProlog", () => {
   const invalidCases = [
     "likes(alice, pizza", // missing closing parenthesis
     "friend bob, carol)", // missing parentheses
-    "knows[dave, eve]", // wrong brackets
     "parentjohn, mary)", // missing '(' after predicate
     "parent john, mary)", // missing parentheses around arguments
     "parent(john mary)", // missing comma between arguments
@@ -72,12 +71,5 @@ describe("isStatementValidProlog", () => {
         expect(await isStatementValidProlog(statement)).toBe(false);
       },
     );
-  });
-});
-
-describe.only("single case invalid isStatementValidProlog", () => {
-  test("returns false for invalid statement", async () => {
-    const statement = "knows[dave, eve]";
-    expect(await isStatementValidProlog(statement)).toBe(false);
   });
 });

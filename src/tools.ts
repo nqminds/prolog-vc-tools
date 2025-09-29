@@ -45,11 +45,6 @@ export const isStatementValidProlog = async (
       )
       .once();
 
-    console.log(result);
-    // If query succeeded, the statement is valid
-    if (result.error) {
-      return false;
-    }
     return result.success === true;
   } catch (e) {
     console.error("Error during Prolog assertion check:", e);
