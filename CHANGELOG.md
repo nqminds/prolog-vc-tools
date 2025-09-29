@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 1.2.0
+
+### Minor Changes
+
+- afbc932: Update documentation
+
 ## 1.1.0
 
 ### Minor Changes
