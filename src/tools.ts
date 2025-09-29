@@ -27,37 +27,27 @@ export const extractPrologStatement = (
   const operation: string = credentialSubjectTyped.operation;
   return `${operation}(${prologRule}).`;
 };
-export const isStatementValidProlog = async (
+
+export const isStringValidTerm = async (
   statement: string,
 ): Promise<boolean> => {
-  // Instantiate SWI-Prolog engine if not already initialized
   const swiplEngine: any = await SWIPL({ arguments: ["-q"] });
 
   try {
-    // Define the check_syntax predicate in Prolog
-    await swiplEngine.prolog
+    const escapedStatement = statement.replace(/"/g, '\\"');
+
+    // Attempt to assert the term; if it fails, catch it
+    const result = await swiplEngine.prolog
       .query(
         `
-assertz((
-  check_syntax(String) :-
-      catch(
-          read_term_from_atom(String, Term, [syntax_errors(error)]),
-          error(syntax_error(_), _),
-          fail
-      ),
-      format("Parsed OK: ~w~n", [Term])
-)).
-`,
+      catch(assertz(${escapedStatement}), _, fail).
+    `,
       )
       .once();
 
-    // Run check_syntax on the provided statement
-    const result = swiplEngine.prolog
-      .query(`check_syntax("${statement}").`)
-      .once();
-    return result.success;
+    return result.success === true;
   } catch (e) {
-    console.error("Error during Prolog syntax check:", e);
+    console.error("Error during Prolog assertion check:", e);
     return false;
   }
 };

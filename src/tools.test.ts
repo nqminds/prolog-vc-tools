@@ -1,5 +1,5 @@
-import { extractPrologStatement, isStatementValidProlog } from "./tools.js";
-import { test, describe, expect, beforeAll, vi } from "vitest";
+import { extractPrologStatement, isStringValidTerm } from "./tools.js";
+import { test, describe, expect } from "vitest";
 
 describe("extractPrologStatement", () => {
   const prolog = "likes(alice, pizza)";
@@ -36,16 +36,40 @@ describe("extractPrologStatement", () => {
 });
 
 describe("isStatementValidProlog", () => {
-  const valid = "assert(parent(john, mary)).";
-  const invalid = "assert(parent((john, mary)).";
+  const validCases = [
+    "parent(john, mary)",
+    "likes(alice, pizza)",
+    "friend(bob, carol)",
+    "knows(dave, eve)",
+    "parent(john, mary)", // for retract
+  ];
 
-  describe("with unowned engine", () => {
-    test("returns true for valid statement", async () => {
-      expect(await isStatementValidProlog(valid)).toBe(true);
-    });
+  const invalidCases = [
+    "likes(alice, pizza", // missing closing parenthesis
+    "friend bob, carol)", // missing parentheses
+    "parentjohn, mary)", // missing '(' after predicate
+    "parent john, mary)", // missing parentheses around arguments
+    "parent(john mary)", // missing comma between arguments
+    "parent(john, 123mary)", // invalid atom
+    "parent(john, )", // missing second argument
+    "parent(john, mary) extra", // extra text after statement
+  ];
 
-    test("returns false for invalid statement", async () => {
-      expect(await isStatementValidProlog(invalid)).toBe(false);
-    });
+  describe("valid cases", () => {
+    test.each(validCases)(
+      "returns true for valid statement: %s",
+      async (statement) => {
+        expect(await isStringValidTerm(statement)).toBe(true);
+      },
+    );
+  });
+
+  describe("invalid cases", () => {
+    test.each(invalidCases)(
+      "returns false for invalid statement: %s",
+      async (statement) => {
+        expect(await isStringValidTerm(statement)).toBe(false);
+      },
+    );
   });
 });
