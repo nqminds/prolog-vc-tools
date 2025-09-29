@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 1.2.3
+
+### Patch Changes
+
+- 2d27aa4: Add error case tests
+
 ## 1.2.2
 
 ### Patch Changes
