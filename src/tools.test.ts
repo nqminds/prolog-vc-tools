@@ -35,7 +35,7 @@ describe("extractPrologStatement", () => {
   });
 });
 
-describe("isStatementValidProlog", () => {
+describe("isStringValidTerm", () => {
   const validCases = [
     "parent(john, mary)",
     "likes(alice, pizza)",
@@ -47,7 +47,7 @@ describe("isStatementValidProlog", () => {
   const invalidCases = [
     "likes(alice, pizza", // missing closing parenthesis
     "friend bob, carol)", // missing parentheses
-    "parentjohn, mary)", // missing '(' after predicate
+    "parentjohn, mary)", // missing '(' after predicatenpx
     "parent john, mary)", // missing parentheses around arguments
     "parent(john mary)", // missing comma between arguments
     "parent(john, 123mary)", // invalid atom
