@@ -1,7 +1,7 @@
 import PrologStatementJSONSchema from "./schemas/PrologStatementCredentialSubject.schema.json" with { type: "json" };
 import { Ajv } from "ajv";
 import { type PrologStatementCredentialSubject } from "./types/PrologStatementCredentialSubject.types.js";
-
+import SWIPL from "swipl-wasm";
 export const add = (a: number, b: number) => a + b;
 
 export const extractPrologStatement = (
@@ -31,4 +31,41 @@ export const extractPrologStatement = (
   }
 
   return prologRule;
+};
+export const isStatementValidProlog = async (
+  statement: string,
+  swiplEngine?: any,
+): Promise<boolean> => {
+  // Instantiate SWI-Prolog engine if not already initialized
+  if (!swiplEngine) {
+    swiplEngine = await SWIPL();
+  }
+
+  try {
+    // Define the check_syntax predicate in Prolog
+    await swiplEngine.prolog
+      .query(
+        `
+assertz((
+  check_syntax(String) :-
+      catch(
+          read_term_from_atom(String, Term, [syntax_errors(error)]),
+          error(syntax_error(_), _),
+          fail
+      ),
+      format("Parsed OK: ~w~n", [Term])
+)).
+`,
+      )
+      .once();
+
+    // Run check_syntax on the provided statement
+    const result = swiplEngine.prolog
+      .query(`check_syntax("${statement}").`)
+      .once();
+    return result.success;
+  } catch (e) {
+    console.error("Error during Prolog syntax check:", e);
+    return false;
+  }
 };
