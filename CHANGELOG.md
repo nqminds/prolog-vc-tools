@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 2.0.0
+
+### Major Changes
+
+- 8029b13: Update isStringValidTerm functionality and tests
+
 ## 1.2.3
 
 ### Patch Changes
