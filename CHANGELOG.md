@@ -1,5 +1,12 @@
 # prolog-vc-tools
 
+## 2.0.1
+
+### Patch Changes
+
+- 85f36ef: Update schema to correct operation enum
+- 627d499: Update tests
+
 ## 2.0.0
 
 ### Major Changes
