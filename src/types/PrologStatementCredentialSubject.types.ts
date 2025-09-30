@@ -1,5 +1,5 @@
 export interface PrologStatementCredentialSubject {
-  operation: "assert" | "assertz" | "retract" | "consult" | "none";
+  operation: "assert" | "asserta" | "assertz" | "retract" | "retractall";
   prolog: string;
   metadata?: {
     createdBy?: string;
