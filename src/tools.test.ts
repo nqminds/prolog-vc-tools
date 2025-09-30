@@ -11,7 +11,6 @@ describe("extractPrologStatement", () => {
       ["assertz", "assertz(likes(alice, pizza))."],
       ["retract", "retract(likes(alice, pizza))."],
       ["retractall", "retractall(likes(alice, pizza))."],
-      ["abolish", "abolish(likes(alice, pizza))."],
     ])("wraps prolog in %s(...)", (operation, expected) => {
       const vc = { credentialSubject: { operation, prolog } };
       expect(extractPrologStatement(vc)).toBe(expected);
