@@ -8,7 +8,7 @@ This NPM package is used to make the translation between signed and verified VCs
 
 This function extracts a Prolog statement from a Verifiable Credential (VC). The `operation` in the VC's `credentialSubject` determines how the Prolog fact is wrapped.
 
-Allowed operations are: `assert`, `asserta`, `assertz`, `retract`, `retractall`, and `abolish`.
+Allowed operations are: `assert`, `asserta`, `assertz`, `retract`, and `retractall`.
 
 **Example:**
 
