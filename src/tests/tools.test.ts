@@ -24,12 +24,13 @@ import ruleCustomVC from "./inputs/rule_custom.json" with { type: "json" };
 import ruleComplexVC from "./inputs/rule_complex.json" with { type: "json" };
 import ruleNotVC from "./inputs/rule_not.json" with { type: "json" };
 import ruleAllVC from "./inputs/rule_all.json" with { type: "json" };
+import personRetractVC from "./inputs/person_retract.json" with { type: "json" };
 
 describe("extractPrologStatement", () => {
   test("should extract prolog fact from person claim", () => {
     const result = extractPrologStatement(personVC);
     expect(result).toEqual({
-      fact: "person(person1).",
+      fact: "assertz(person(person1)).",
       type: ClaimType.Person,
     });
   });
@@ -37,7 +38,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from group claim", () => {
     const result = extractPrologStatement(groupVC);
     expect(result).toEqual({
-      fact: "group(group1).",
+      fact: "assertz(group(group1)).",
       type: ClaimType.Group,
     });
   });
@@ -45,7 +46,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from person_belongs_to_group claim", () => {
     const result = extractPrologStatement(personBelongsToGroupVC);
     expect(result).toEqual({
-      fact: "person_belongs_to_group(person1, group1).",
+      fact: "assertz(person_belongs_to_group(person1, group1)).",
       type: ClaimType.PersonBelongsToGroup,
     });
   });
@@ -53,7 +54,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from resource_owned_by_person claim", () => {
     const result = extractPrologStatement(resourceOwnedByPersonVC);
     expect(result).toEqual({
-      fact: "resource_owned_by_person(resource1, person1).",
+      fact: "assertz(resource_owned_by_person(resource1, person1)).",
       type: ClaimType.ResourceOwnedByPerson,
     });
   });
@@ -61,7 +62,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from resource_shared_with_group claim", () => {
     const result = extractPrologStatement(resourceSharedWithGroupVC);
     expect(result).toEqual({
-      fact: "resource_shared_with_group(resource1, group1).",
+      fact: "assertz(resource_shared_with_group(resource1, group1)).",
       type: ClaimType.ResourceSharedWithGroup,
     });
   });
@@ -69,7 +70,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from resource_shared_with_person claim", () => {
     const result = extractPrologStatement(resourceSharedWithPersonVC);
     expect(result).toEqual({
-      fact: "resource_shared_with_person(resource1, person1).",
+      fact: "assertz(resource_shared_with_person(resource1, person1)).",
       type: ClaimType.ResourceSharedWithPerson,
     });
   });
@@ -77,7 +78,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from file claim", () => {
     const result = extractPrologStatement(fileVC);
     expect(result).toEqual({
-      fact: "file(resource1).",
+      fact: "assertz(file(resource1)).",
       type: ClaimType.File,
     });
   });
@@ -85,7 +86,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from folder claim", () => {
     const result = extractPrologStatement(folderVC);
     expect(result).toEqual({
-      fact: "folder(resource1).",
+      fact: "assertz(folder(resource1)).",
       type: ClaimType.Folder,
     });
   });
@@ -93,7 +94,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from resource claim", () => {
     const result = extractPrologStatement(resourceVC);
     expect(result).toEqual({
-      fact: "resource(resource1).",
+      fact: "assertz(resource(resource1)).",
       type: ClaimType.Resource,
     });
   });
@@ -101,7 +102,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from resource_contained_in claim", () => {
     const result = extractPrologStatement(resourceContainedInVC);
     expect(result).toEqual({
-      fact: "resource_contained_in(resource1, folder1).",
+      fact: "assertz(resource_contained_in(resource1, folder1)).",
       type: ClaimType.ResourceContainedIn,
     });
   });
@@ -109,7 +110,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from person_custom_property claim", () => {
     const result = extractPrologStatement(personCustomPropertyVC);
     expect(result).toEqual({
-      fact: "person_x(person1, age, 30).",
+      fact: "assertz(person_x(person1, age, 30)).",
       type: ClaimType.PersonCustomProperty,
     });
   });
@@ -117,7 +118,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from group_custom_property claim", () => {
     const result = extractPrologStatement(groupCustomPropertyVC);
     expect(result).toEqual({
-      fact: "group_custom_property(group1, department, engineering).",
+      fact: "assertz(group_custom_property(group1, department, engineering)).",
       type: ClaimType.GroupCustomProperty,
     });
   });
@@ -133,7 +134,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from query_custom claim", () => {
     const result = extractPrologStatement(queryCustomVC);
     expect(result).toEqual({
-      fact: "parent(X,Y) :- father(X,Y).",
+      fact: "parent(john, X).",
       type: ClaimType.QueryCustom,
     });
   });
@@ -141,7 +142,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from rule claim", () => {
     const result = extractPrologStatement(ruleVC);
     expect(result).toEqual({
-      fact: "my_rule(X) :- (p(a), q(b)).",
+      fact: "assertz(my_rule(X) :- (p(a), q(b))).",
       type: ClaimType.Rule,
     });
   });
@@ -149,7 +150,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from rule_custom claim", () => {
     const result = extractPrologStatement(ruleCustomVC);
     expect(result).toEqual({
-      fact: "my_rule(X) :- a(X), b(X).",
+      fact: "assertz(my_rule(X) :- a(X), b(X)).",
       type: ClaimType.RuleCustom,
     });
   });
@@ -157,7 +158,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from complex rule claim", () => {
     const result = extractPrologStatement(ruleComplexVC);
     expect(result).toEqual({
-      fact: "complex_rule(X, Y) :- ((p(X), q(Y)); (r(X), s(Y))).",
+      fact: "assertz(complex_rule(X, Y) :- ((p(X), q(Y)); (r(X), s(Y)))).",
       type: ClaimType.Rule,
     });
   });
@@ -165,7 +166,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from rule with not", () => {
     const result = extractPrologStatement(ruleNotVC);
     expect(result).toEqual({
-      fact: "not_rule(X) :- (p(X), \+(q(X))).",
+      fact: "assertz(not_rule(X) :- (p(X), \+(q(X)))).",
       type: ClaimType.Rule,
     });
   });
@@ -173,8 +174,16 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from rule with all operators", () => {
     const result = extractPrologStatement(ruleAllVC);
     expect(result).toEqual({
-      fact: "all_rule(X, Y) :- ((p(X), \+(q(Y))); r(X)).",
+      fact: "assertz(all_rule(X, Y) :- ((p(X), \+(q(Y))); r(X))).",
       type: ClaimType.Rule,
+    });
+  });
+
+  test("should extract prolog fact from person claim with retract", () => {
+    const result = extractPrologStatement(personRetractVC);
+    expect(result).toEqual({
+      fact: "retract(person(person1)).",
+      type: ClaimType.Person,
     });
   });
 

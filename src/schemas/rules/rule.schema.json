@@ -12,9 +12,14 @@
       "type": "array",
       "items": { "type": "string" }
     },
-    "returns": { "enum": ["boolean"] }
+    "returns": { "enum": ["boolean"] },
+    "updateView": {
+      "type": "string",
+      "enum": ["assert", "retract"],
+      "default": "assert"
+    }
   },
-  "required": ["claimType", "name", "evaluate", "variables", "returns"],
+  "required": ["claimType", "name", "evaluate", "variables", "returns", "updateView"],
 
   "$defs": {
     "logicNode": {

@@ -85,40 +85,40 @@ export const extractPrologStatement = (
   let fact = "";
   switch (claimType) {
     case ClaimType.Person:
-      fact = `person(${credentialSubject.id}).`;
+      fact = `person(${credentialSubject.id})`;
       break;
     case ClaimType.Group:
-      fact = `group(${credentialSubject.id}).`;
+      fact = `group(${credentialSubject.id})`;
       break;
     case ClaimType.PersonBelongsToGroup:
-      fact = `person_belongs_to_group(${credentialSubject.person_id}, ${credentialSubject.group_id}).`;
+      fact = `person_belongs_to_group(${credentialSubject.person_id}, ${credentialSubject.group_id})`;
       break;
     case ClaimType.ResourceOwnedByPerson:
-      fact = `resource_owned_by_person(${credentialSubject.resource_id}, ${credentialSubject.person_id}).`;
+      fact = `resource_owned_by_person(${credentialSubject.resource_id}, ${credentialSubject.person_id})`;
       break;
     case ClaimType.ResourceSharedWithGroup:
-      fact = `resource_shared_with_group(${credentialSubject.resource_id}, ${credentialSubject.group_id}).`;
+      fact = `resource_shared_with_group(${credentialSubject.resource_id}, ${credentialSubject.group_id})`;
       break;
     case ClaimType.ResourceSharedWithPerson:
-      fact = `resource_shared_with_person(${credentialSubject.resource_id}, ${credentialSubject.person_id}).`;
+      fact = `resource_shared_with_person(${credentialSubject.resource_id}, ${credentialSubject.person_id})`;
       break;
     case ClaimType.File:
-      fact = `file(${credentialSubject.resource_id}).`;
+      fact = `file(${credentialSubject.resource_id})`;
       break;
     case ClaimType.Folder:
-      fact = `folder(${credentialSubject.resource_id}).`;
+      fact = `folder(${credentialSubject.resource_id})`;
       break;
     case ClaimType.Resource:
-      fact = `resource(${credentialSubject.id}).`;
+      fact = `resource(${credentialSubject.id})`;
       break;
     case ClaimType.ResourceContainedIn:
-      fact = `resource_contained_in(${credentialSubject.resource_id}, ${credentialSubject.folder_id}).`;
+      fact = `resource_contained_in(${credentialSubject.resource_id}, ${credentialSubject.folder_id})`;
       break;
     case ClaimType.PersonCustomProperty:
-      fact = `person_x(${credentialSubject.id}, ${credentialSubject.property}, ${credentialSubject.value}).`;
+      fact = `person_x(${credentialSubject.id}, ${credentialSubject.property}, ${credentialSubject.value})`;
       break;
     case ClaimType.GroupCustomProperty:
-      fact = `group_custom_property(${credentialSubject.id}, ${credentialSubject.property}, ${credentialSubject.value}).`;
+      fact = `group_custom_property(${credentialSubject.id}, ${credentialSubject.property}, ${credentialSubject.value})`;
       break;
     case ClaimType.Query:
       if (Array.isArray(credentialSubject.args)) {
@@ -138,11 +138,16 @@ export const extractPrologStatement = (
         ? credentialSubject.variables.join(", ")
         : "";
       const ruleBody = jsonToProlog(credentialSubject.evaluate);
-      fact = `${ruleName}(${variables}) :- ${ruleBody}.`;
+      fact = `${ruleName}(${variables}) :- ${ruleBody}`;
       break;
   }
 
-  return { fact, type: claimType };
+  if (credentialSubject.updateView === "retract") {
+    return { fact: `retract(${fact}).`, type: claimType };
+  } else if (credentialSubject.updateView === "assert") {
+    return { fact: `assertz(${fact}).`, type: claimType };
+  }
+  return { fact: `${fact}`, type: claimType };
 };
 
 const jsonToProlog = (evaluate: any): string => {

@@ -2,6 +2,6 @@
   "credentialSubject": {
     "claimType": "person",
     "id": "person1",
-    "updateView": "assert"
+    "updateView": "retract"
   }
 }

@@ -9,6 +9,7 @@
         { "predicate": "p", "args": ["X"] },
         { "not": { "predicate": "q", "args": ["X"] } }
       ]
-    }
+    },
+    "updateView": "assert"
   }
 }

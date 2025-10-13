@@ -19,6 +19,7 @@
         }
       ]
     },
-    "returns": "boolean"
+    "returns": "boolean",
+    "updateView": "assert"
   }
 }

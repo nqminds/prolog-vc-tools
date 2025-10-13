@@ -8,7 +8,12 @@
       "const": "resource_owned_by_person"
     },
     "resource_id": { "type": "string" },
-    "person_id": { "type": "string" }
+    "person_id": { "type": "string" },
+    "updateView": {
+      "type": "string",
+      "enum": ["assert", "retract"],
+      "default": "assert"
+    }
   },
-  "required": ["claimType", "resource_id", "person_id"]
+  "required": ["claimType", "resource_id", "person_id", "updateView"]
 }

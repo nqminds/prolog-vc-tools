@@ -1,6 +1,7 @@
 {
   "credentialSubject": {
     "claimType": "resource",
-    "id": "resource1"
+    "id": "resource1",
+    "updateView": "assert"
   }
 }

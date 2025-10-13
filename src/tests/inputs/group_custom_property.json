@@ -3,6 +3,7 @@
     "claimType": "group_custom_property",
     "id": "group1",
     "property": "department",
-    "value": "engineering"
+    "value": "engineering",
+    "updateView": "assert"
   }
 }

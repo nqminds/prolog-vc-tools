@@ -1,6 +1,7 @@
 {
   "credentialSubject": {
     "claimType": "group",
-    "id": "group1"
+    "id": "group1",
+    "updateView": "assert"
   }
 }

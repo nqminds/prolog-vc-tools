@@ -1,6 +1,7 @@
 {
   "credentialSubject": {
     "claimType": "folder",
-    "resource_id": "resource1"
+    "resource_id": "resource1",
+    "updateView": "assert"
   }
 }
