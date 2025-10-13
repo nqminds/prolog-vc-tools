@@ -1,0 +1,24 @@
+{
+  "credentialSubject": {
+    "claimType": "rule",
+    "name": "complex_rule",
+    "variables": ["X", "Y"],
+    "evaluate": {
+      "or": [
+        {
+          "and": [
+            { "predicate": "p", "args": ["X"] },
+            { "predicate": "q", "args": ["Y"] }
+          ]
+        },
+        {
+          "and": [
+            { "predicate": "r", "args": ["X"] },
+            { "predicate": "s", "args": ["Y"] }
+          ]
+        }
+      ]
+    },
+    "returns": "boolean"
+  }
+}
