@@ -1,0 +1,6 @@
+{
+  "credentialSubject": {
+    "claimType": "person",
+    "id": "person1"
+  }
+}

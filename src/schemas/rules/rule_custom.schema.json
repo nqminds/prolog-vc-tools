@@ -1,11 +1,10 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Custom Rule",
   "type": "object",
   "properties": {
     "claimType": {
       "type": "string",
-      "const": "custom_rule"
+      "const": "rule_custom"
     },
     "prolog": { "type": "string", "description": "Prolog rule as a string" }
   },

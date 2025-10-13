@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Rule Definition (Generalized Boolean Logic)",
   "type": "object",
   "properties": {
@@ -7,7 +6,6 @@
       "type": "string",
       "const": "rule"
     },
-    "type": { "const": "rule" },
     "name": { "type": "string" },
     "evaluate": { "$ref": "#/$defs/logicNode" },
     "variables": {
@@ -16,7 +14,7 @@
     },
     "returns": { "enum": ["boolean"] }
   },
-  "required": ["claimType", "type", "name", "evaluate", "variables", "returns"],
+  "required": ["claimType", "name", "evaluate", "variables", "returns"],
 
   "$defs": {
     "logicNode": {

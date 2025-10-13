@@ -1,0 +1,6 @@
+{
+  "credentialSubject": {
+    "claimType": "folder",
+    "resource_id": "resource1"
+  }
+}

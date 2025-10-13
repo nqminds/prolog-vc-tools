@@ -1,0 +1,7 @@
+{
+  "credentialSubject": {
+    "claimType": "person_belongs_to_group",
+    "person_id": "person1",
+    "group_id": "group1"
+  }
+}

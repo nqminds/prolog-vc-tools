@@ -1,0 +1,8 @@
+{
+  "credentialSubject": {
+    "claimType": "person_custom_property",
+    "id": "person1",
+    "property": "age",
+    "value": "30"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "credentialSubject": {
+    "claimType": "resource_shared_with_group",
+    "resource_id": "resource1",
+    "group_id": "group1"
+  }
+}

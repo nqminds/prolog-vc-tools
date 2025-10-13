@@ -1,0 +1,6 @@
+{
+  "credentialSubject": {
+    "claimType": "query_custom",
+    "prolog": "parent(X,Y) :- father(X,Y)."
+  }
+}
