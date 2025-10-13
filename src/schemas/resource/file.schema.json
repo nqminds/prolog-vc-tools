@@ -3,7 +3,11 @@
   "title": "File Resource",
   "type": "object",
   "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "file"
+    },
     "resource_id": { "type": "string" }
   },
-  "required": ["resource_id"]
+  "required": ["claimType", "resource_id"]
 }

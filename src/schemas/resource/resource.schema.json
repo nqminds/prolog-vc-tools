@@ -3,7 +3,11 @@
   "title": "Resource",
   "type": "object",
   "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "resource"
+    },
     "id": { "type": "string" }
   },
-  "required": ["id"]
+  "required": ["claimType", "id"]
 }

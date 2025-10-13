@@ -3,7 +3,11 @@
   "title": "Folder Resource",
   "type": "object",
   "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "folder"
+    },
     "resource_id": { "type": "string" }
   },
-  "required": ["resource_id"]
+  "required": ["claimType", "resource_id"]
 }

@@ -3,6 +3,10 @@
   "title": "Query",
   "type": "object",
   "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "query"
+    },
     "predicate": { "type": "string" },
     "args": {
       "type": "array",
@@ -10,5 +14,5 @@
       "description": "Arguments for the predicate"
     }
   },
-  "required": ["predicate", "args"]
+  "required": ["claimType", "predicate", "args"]
 }

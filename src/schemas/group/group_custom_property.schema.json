@@ -3,9 +3,13 @@
   "title": "Group Property",
   "type": "object",
   "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "group_custom_property"
+    },
     "property": { "type": "string" },
     "value": { "type": "string" },
     "id": { "type": "string", "description": "Group's ID" }
   },
-  "required": ["property", "value", "id"]
+  "required": ["claimType", "property", "value", "id"]
 }

@@ -3,8 +3,12 @@
   "title": "Person Belongs To Group",
   "type": "object",
   "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "person_belongs_to_group"
+    },
     "person_id": { "type": "string", "description": "Person's ID" },
     "group_id": { "type": "string", "description": "Group's ID" }
   },
-  "required": ["person_id", "group_id"]
+  "required": ["claimType", "person_id", "group_id"]
 }

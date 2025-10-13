@@ -3,7 +3,11 @@
   "title": "Group",
   "type": "object",
   "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "group"
+    },
     "id": { "type": "string", "description": "Group's ID" }
   },
-  "required": ["id"]
+  "required": ["claimType", "id"]
 }

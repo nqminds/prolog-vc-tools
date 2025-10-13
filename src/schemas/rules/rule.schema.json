@@ -3,6 +3,10 @@
   "title": "Rule Definition (Generalized Boolean Logic)",
   "type": "object",
   "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "rule"
+    },
     "type": { "const": "rule" },
     "name": { "type": "string" },
     "evaluate": { "$ref": "#/$defs/logicNode" },
@@ -12,7 +16,7 @@
     },
     "returns": { "enum": ["boolean"] }
   },
-  "required": ["type", "name", "evaluate", "variables", "returns"],
+  "required": ["claimType", "type", "name", "evaluate", "variables", "returns"],
 
   "$defs": {
     "logicNode": {

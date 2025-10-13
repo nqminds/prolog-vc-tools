@@ -3,7 +3,11 @@
   "title": "Custom Rule",
   "type": "object",
   "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "custom_rule"
+    },
     "prolog": { "type": "string", "description": "Prolog rule as a string" }
   },
-  "required": ["prolog"]
+  "required": ["claimType", "prolog"]
 }

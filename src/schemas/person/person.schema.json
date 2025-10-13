@@ -3,7 +3,11 @@
   "title": "Person",
   "type": "object",
   "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "person"
+    },
     "id": { "type": "string", "description": "Person's ID" }
   },
-  "required": ["id"]
+  "required": ["claimType", "id"]
 }

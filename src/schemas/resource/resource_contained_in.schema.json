@@ -3,8 +3,12 @@
   "title": "Resource Contained In",
   "type": "object",
   "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "resource_contained_in"
+    },
     "resource_id": { "type": "string" },
     "folder_id": { "type": "string" }
   },
-  "required": ["resource_id", "folder_id"]
+  "required": ["claimType", "resource_id", "folder_id"]
 }
