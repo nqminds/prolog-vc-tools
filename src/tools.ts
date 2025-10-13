@@ -147,9 +147,9 @@ export const extractPrologStatement = (
 
 const jsonToProlog = (evaluate: any): string => {
   if (evaluate.and) {
-    return evaluate.and.map(jsonToProlog).join(", ");
+    return `(${evaluate.and.map(jsonToProlog).join(", ")})`;
   } else if (evaluate.or) {
-    return evaluate.or.map(jsonToProlog).join("; ");
+    return `(${evaluate.or.map(jsonToProlog).join("; ")})`;
   } else if (evaluate.not) {
     return `\+(${jsonToProlog(evaluate.not)})`;
   } else if (evaluate.predicate) {

@@ -141,7 +141,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from rule claim", () => {
     const result = extractPrologStatement(ruleVC);
     expect(result).toEqual({
-      fact: "my_rule(X) :- p(a), q(b).",
+      fact: "my_rule(X) :- (p(a), q(b)).",
       type: ClaimType.Rule,
     });
   });
@@ -157,7 +157,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from complex rule claim", () => {
     const result = extractPrologStatement(ruleComplexVC);
     expect(result).toEqual({
-      fact: "complex_rule(X, Y) :- p(X), q(Y); r(X), s(Y).",
+      fact: "complex_rule(X, Y) :- ((p(X), q(Y)); (r(X), s(Y))).",
       type: ClaimType.Rule,
     });
   });
@@ -165,7 +165,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from rule with not", () => {
     const result = extractPrologStatement(ruleNotVC);
     expect(result).toEqual({
-      fact: "not_rule(X) :- p(X), \+(q(X)).",
+      fact: "not_rule(X) :- (p(X), \+(q(X))).",
       type: ClaimType.Rule,
     });
   });
@@ -173,7 +173,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from rule with all operators", () => {
     const result = extractPrologStatement(ruleAllVC);
     expect(result).toEqual({
-      fact: "all_rule(X, Y) :- p(X), \+(q(Y)); r(X).",
+      fact: "all_rule(X, Y) :- ((p(X), \+(q(Y))); r(X)).",
       type: ClaimType.Rule,
     });
   });
