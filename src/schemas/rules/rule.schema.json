@@ -19,7 +19,14 @@
       "default": "assert"
     }
   },
-  "required": ["claimType", "name", "evaluate", "variables", "returns", "updateView"],
+  "required": [
+    "claimType",
+    "name",
+    "evaluate",
+    "variables",
+    "returns",
+    "updateView"
+  ],
 
   "$defs": {
     "logicNode": {
