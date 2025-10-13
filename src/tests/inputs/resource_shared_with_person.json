@@ -1,0 +1,8 @@
+{
+  "credentialSubject": {
+    "claimType": "resource_shared_with_person",
+    "resource_id": "resource1",
+    "person_id": "person1",
+    "updateView": "assert"
+  }
+}

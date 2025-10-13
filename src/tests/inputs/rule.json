@@ -1,0 +1,15 @@
+{
+  "credentialSubject": {
+    "claimType": "rule",
+    "name": "my_rule",
+    "evaluate": {
+      "and": [
+        { "predicate": "p", "args": ["a"] },
+        { "predicate": "q", "args": ["b"] }
+      ]
+    },
+    "variables": ["X"],
+    "returns": "boolean",
+    "updateView": "assert"
+  }
+}

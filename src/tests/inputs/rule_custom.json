@@ -1,0 +1,7 @@
+{
+  "credentialSubject": {
+    "claimType": "rule_custom",
+    "prolog": "my_rule(X) :- a(X), b(X)",
+    "updateView": "assert"
+  }
+}

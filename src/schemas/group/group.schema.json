@@ -1,0 +1,17 @@
+{
+  "title": "Group",
+  "type": "object",
+  "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "group"
+    },
+    "id": { "type": "string", "description": "Group's ID" },
+    "updateView": {
+      "type": "string",
+      "enum": ["assert", "retract"],
+      "default": "assert"
+    }
+  },
+  "required": ["claimType", "id", "updateView"]
+}

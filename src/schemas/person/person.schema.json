@@ -1,0 +1,17 @@
+{
+  "title": "Person",
+  "type": "object",
+  "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "person"
+    },
+    "id": { "type": "string", "description": "Person's ID" },
+    "updateView": {
+      "type": "string",
+      "enum": ["assert", "retract"],
+      "default": "assert"
+    }
+  },
+  "required": ["claimType", "id", "updateView"]
+}

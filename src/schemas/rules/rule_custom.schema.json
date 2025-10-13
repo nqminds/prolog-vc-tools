@@ -1,0 +1,17 @@
+{
+  "title": "Custom Rule",
+  "type": "object",
+  "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "rule_custom"
+    },
+    "prolog": { "type": "string", "description": "Prolog rule as a string" },
+    "updateView": {
+      "type": "string",
+      "enum": ["assert", "retract"],
+      "default": "assert"
+    }
+  },
+  "required": ["claimType", "prolog", "updateView"]
+}

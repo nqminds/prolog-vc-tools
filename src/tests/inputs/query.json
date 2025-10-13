@@ -1,0 +1,7 @@
+{
+  "credentialSubject": {
+    "claimType": "query",
+    "predicate": "parent",
+    "args": ["john", "mary"]
+  }
+}

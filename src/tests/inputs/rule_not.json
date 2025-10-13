@@ -1,0 +1,15 @@
+{
+  "credentialSubject": {
+    "claimType": "rule",
+    "name": "not_rule",
+    "variables": ["X"],
+    "returns": "boolean",
+    "evaluate": {
+      "and": [
+        { "predicate": "p", "args": ["X"] },
+        { "not": { "predicate": "q", "args": ["X"] } }
+      ]
+    },
+    "updateView": "assert"
+  }
+}

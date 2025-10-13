@@ -1,0 +1,7 @@
+{
+  "credentialSubject": {
+    "claimType": "file",
+    "resource_id": "resource1",
+    "updateView": "assert"
+  }
+}

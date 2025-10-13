@@ -1,0 +1,6 @@
+{
+  "credentialSubject": {
+    "claimType": "query_custom",
+    "prolog": "parent(john, X)."
+  }
+}

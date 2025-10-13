@@ -1,0 +1,18 @@
+{
+  "title": "Resource Contained In",
+  "type": "object",
+  "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "resource_contained_in"
+    },
+    "resource_id": { "type": "string" },
+    "folder_id": { "type": "string" },
+    "updateView": {
+      "type": "string",
+      "enum": ["assert", "retract"],
+      "default": "assert"
+    }
+  },
+  "required": ["claimType", "resource_id", "folder_id", "updateView"]
+}

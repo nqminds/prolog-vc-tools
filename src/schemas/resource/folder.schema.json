@@ -1,0 +1,17 @@
+{
+  "title": "Folder Resource",
+  "type": "object",
+  "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "folder"
+    },
+    "resource_id": { "type": "string" },
+    "updateView": {
+      "type": "string",
+      "enum": ["assert", "retract"],
+      "default": "assert"
+    }
+  },
+  "required": ["claimType", "resource_id", "updateView"]
+}

@@ -1,0 +1,17 @@
+{
+  "title": "Resource",
+  "type": "object",
+  "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "resource"
+    },
+    "id": { "type": "string" },
+    "updateView": {
+      "type": "string",
+      "enum": ["assert", "retract"],
+      "default": "assert"
+    }
+  },
+  "required": ["claimType", "id", "updateView"]
+}

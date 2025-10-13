@@ -1,0 +1,12 @@
+{
+  "title": "Custom Query",
+  "type": "object",
+  "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "query_custom"
+    },
+    "prolog": { "type": "string", "description": "Prolog query as a string" }
+  },
+  "required": ["claimType", "prolog"]
+}
