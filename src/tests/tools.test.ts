@@ -138,7 +138,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from rule claim", () => {
     const result = extractPrologStatement(ruleVC);
     expect(result).toEqual({
-      fact: 'rule(my_rule, {"and":[{"predicate":"p","args":["a"]},{"predicate":"q","args":["b"]}]}).',
+      fact: "my_rule(X) :- p(a), q(b).",
       type: ClaimType.Rule,
     });
   });

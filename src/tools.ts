@@ -133,12 +133,28 @@ export const extractPrologStatement = (
       }
       break;
     case ClaimType.Rule:
-      const ruleBody = JSON.stringify(credentialSubject.evaluate);
-      fact = `rule(${credentialSubject.name}, ${ruleBody}).`;
+      const ruleName = credentialSubject.name;
+      const variables = Array.isArray(credentialSubject.variables)
+        ? credentialSubject.variables.join(", ")
+        : "";
+      const ruleBody = jsonToProlog(credentialSubject.evaluate);
+      fact = `${ruleName}(${variables}) :- ${ruleBody}.`;
       break;
   }
 
   return { fact, type: claimType };
+};
+
+const jsonToProlog = (evaluate: any): string => {
+  if (evaluate.and) {
+    return evaluate.and.map(jsonToProlog).join(", ");
+  } else if (evaluate.or) {
+    return evaluate.or.map(jsonToProlog).join("; ");
+  } else if (evaluate.predicate) {
+    const args = evaluate.args.join(", ");
+    return `${evaluate.predicate}(${args})`;
+  }
+  return "";
 };
 
 export const isStringValidTerm = async (
