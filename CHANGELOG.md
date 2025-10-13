@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 3.0.0
+
+### Major Changes
+
+- 5687e3b: Updates extractPrologStatement to use new claim schemas
+
 ## 2.0.1
 
 ### Patch Changes
