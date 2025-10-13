@@ -23,6 +23,7 @@ import ruleVC from "./inputs/rule.json" with { type: "json" };
 import ruleCustomVC from "./inputs/rule_custom.json" with { type: "json" };
 import ruleComplexVC from "./inputs/rule_complex.json" with { type: "json" };
 import ruleNotVC from "./inputs/rule_not.json" with { type: "json" };
+import ruleAllVC from "./inputs/rule_all.json" with { type: "json" };
 
 describe("extractPrologStatement", () => {
   test("should extract prolog fact from person claim", () => {
@@ -164,7 +165,15 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from rule with not", () => {
     const result = extractPrologStatement(ruleNotVC);
     expect(result).toEqual({
-      fact: "not_rule(X) :- p(X), \+ (q(X)).",
+      fact: "not_rule(X) :- p(X), \+(q(X)).",
+      type: ClaimType.Rule,
+    });
+  });
+
+  test("should extract prolog fact from rule with all operators", () => {
+    const result = extractPrologStatement(ruleAllVC);
+    expect(result).toEqual({
+      fact: "all_rule(X, Y) :- p(X), \+(q(Y)); r(X).",
       type: ClaimType.Rule,
     });
   });

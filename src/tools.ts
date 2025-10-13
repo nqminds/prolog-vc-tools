@@ -151,7 +151,7 @@ const jsonToProlog = (evaluate: any): string => {
   } else if (evaluate.or) {
     return evaluate.or.map(jsonToProlog).join("; ");
   } else if (evaluate.not) {
-    return `\+ (${jsonToProlog(evaluate.not)})`;
+    return `\+(${jsonToProlog(evaluate.not)})`;
   } else if (evaluate.predicate) {
     const args = evaluate.args.join(", ");
     return `${evaluate.predicate}(${args})`;

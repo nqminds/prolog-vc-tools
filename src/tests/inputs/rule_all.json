@@ -1,0 +1,19 @@
+{
+  "credentialSubject": {
+    "claimType": "rule",
+    "name": "all_rule",
+    "variables": ["X", "Y"],
+    "returns": "boolean",
+    "evaluate": {
+      "or": [
+        {
+          "and": [
+            { "predicate": "p", "args": ["X"] },
+            { "not": { "predicate": "q", "args": ["Y"] } }
+          ]
+        },
+        { "predicate": "r", "args": ["X"] }
+      ]
+    }
+  }
+}
