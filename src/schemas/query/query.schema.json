@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Query",
+  "type": "object",
+  "properties": {
+    "predicate": { "type": "string" },
+    "args": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Arguments for the predicate"
+    }
+  },
+  "required": ["predicate", "args"]
+}

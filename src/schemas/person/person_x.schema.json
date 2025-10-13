@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Person Property",
+  "type": "object",
+  "properties": {
+    "property": { "type": "string" },
+    "value": { "type": "string" },
+    "id": { "type": "string", "description": "Person's ID" }
+  },
+  "required": ["property", "value", "id"]
+}

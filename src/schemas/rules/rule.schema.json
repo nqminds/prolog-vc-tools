@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Rule Definition (Generalized Boolean Logic)",
+  "type": "object",
+  "properties": {
+    "type": { "const": "rule" },
+    "name": { "type": "string" },
+    "evaluate": { "$ref": "#/$defs/logicNode" },
+    "variables": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "returns": { "enum": ["boolean"] }
+  },
+  "required": ["type", "name", "evaluate", "variables", "returns"],
+
+  "$defs": {
+    "logicNode": {
+      "description": "A logical expression node (predicate or combinator)",
+      "type": "object",
+      "oneOf": [
+        {
+          "description": "A predicate (atomic condition)",
+          "properties": {
+            "predicate": { "type": "string" },
+            "args": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "required": ["predicate", "args"],
+          "additionalProperties": false
+        },
+        {
+          "description": "Logical AND combinator",
+          "properties": {
+            "and": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/logicNode" },
+              "minItems": 1
+            }
+          },
+          "required": ["and"],
+          "additionalProperties": false
+        },
+        {
+          "description": "Logical OR combinator",
+          "properties": {
+            "or": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/logicNode" },
+              "minItems": 1
+            }
+          },
+          "required": ["or"],
+          "additionalProperties": false
+        },
+        {
+          "description": "Logical NOT combinator",
+          "properties": {
+            "not": { "$ref": "#/$defs/logicNode" }
+          },
+          "required": ["not"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

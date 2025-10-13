@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Person Belongs To Group",
+  "type": "object",
+  "properties": {
+    "person_id": { "type": "string", "description": "Person's ID" },
+    "group_id": { "type": "string", "description": "Group's ID" }
+  },
+  "required": ["person_id", "group_id"]
+}

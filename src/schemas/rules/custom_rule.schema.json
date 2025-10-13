@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Custom Rule",
+  "type": "object",
+  "properties": {
+    "prolog": { "type": "string", "description": "Prolog rule as a string" }
+  },
+  "required": ["prolog"]
+}
