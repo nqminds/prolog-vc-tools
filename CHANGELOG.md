@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 3.0.1
+
+### Patch Changes
+
+- 233c56f: Organise test files
+
 ## 3.0.0
 
 ### Major Changes
