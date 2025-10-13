@@ -5,26 +5,26 @@ import {
 } from "../tools.js";
 import { test, describe, expect } from "vitest";
 
-import personVC from "./inputs/person.json" with { type: "json" };
-import groupVC from "./inputs/group.json" with { type: "json" };
-import personBelongsToGroupVC from "./inputs/person_belongs_to_group.json" with { type: "json" };
-import resourceOwnedByPersonVC from "./inputs/resource_owned_by_person.json" with { type: "json" };
-import resourceSharedWithGroupVC from "./inputs/resource_shared_with_group.json" with { type: "json" };
-import resourceSharedWithPersonVC from "./inputs/resource_shared_with_person.json" with { type: "json" };
-import fileVC from "./inputs/file.json" with { type: "json" };
-import folderVC from "./inputs/folder.json" with { type: "json" };
-import resourceVC from "./inputs/resource.json" with { type: "json" };
-import resourceContainedInVC from "./inputs/resource_contained_in.json" with { type: "json" };
-import personCustomPropertyVC from "./inputs/person_custom_property.json" with { type: "json" };
-import groupCustomPropertyVC from "./inputs/group_custom_property.json" with { type: "json" };
-import queryVC from "./inputs/query.json" with { type: "json" };
-import queryCustomVC from "./inputs/query_custom.json" with { type: "json" };
-import ruleVC from "./inputs/rule.json" with { type: "json" };
-import ruleCustomVC from "./inputs/rule_custom.json" with { type: "json" };
-import ruleComplexVC from "./inputs/rule_complex.json" with { type: "json" };
-import ruleNotVC from "./inputs/rule_not.json" with { type: "json" };
-import ruleAllVC from "./inputs/rule_all.json" with { type: "json" };
-import personRetractVC from "./inputs/person_retract.json" with { type: "json" };
+import personVC from "./inputs/person/person.json" with { type: "json" };
+import groupVC from "./inputs/group/group.json" with { type: "json" };
+import personBelongsToGroupVC from "./inputs/relations/person_belongs_to_group.json" with { type: "json" };
+import resourceOwnedByPersonVC from "./inputs/relations/resource_owned_by_person.json" with { type: "json" };
+import resourceSharedWithGroupVC from "./inputs/relations/resource_shared_with_group.json" with { type: "json" };
+import resourceSharedWithPersonVC from "./inputs/relations/resource_shared_with_person.json" with { type: "json" };
+import fileVC from "./inputs/resource/file.json" with { type: "json" };
+import folderVC from "./inputs/resource/folder.json" with { type: "json" };
+import resourceVC from "./inputs/resource/resource.json" with { type: "json" };
+import resourceContainedInVC from "./inputs/relations/resource_contained_in.json" with { type: "json" };
+import personCustomPropertyVC from "./inputs/person/person_custom_property.json" with { type: "json" };
+import groupCustomPropertyVC from "./inputs/group/group_custom_property.json" with { type: "json" };
+import queryVC from "./inputs/query/query.json" with { type: "json" };
+import queryCustomVC from "./inputs/query/query_custom.json" with { type: "json" };
+import ruleVC from "./inputs/rules/rule.json" with { type: "json" };
+import ruleCustomVC from "./inputs/rules/rule_custom.json" with { type: "json" };
+import ruleComplexVC from "./inputs/rules/rule_complex.json" with { type: "json" };
+import ruleNotVC from "./inputs/rules/rule_not.json" with { type: "json" };
+import ruleAllVC from "./inputs/rules/rule_all.json" with { type: "json" };
+import personRetractVC from "./inputs/person/person_retract.json" with { type: "json" };
 
 describe("extractPrologStatement", () => {
   test("should extract prolog fact from person claim", () => {
