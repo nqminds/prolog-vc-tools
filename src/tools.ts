@@ -56,7 +56,7 @@ const schemas = {
   [ClaimType.Rule]: ruleSchema,
 };
 
-export const extractPrologFact = (
+export const extractPrologStatement = (
   verifiableCredential: any,
 ): { fact: string; type: ClaimType } | null => {
   const credentialSubject = (verifiableCredential as any).credentialSubject;
