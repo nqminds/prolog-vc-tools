@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 5.0.0
+
+### Major Changes
+
+- a75f9e3: Extend updateView to include assert, asserta, assertz, retract
+
 ## 4.0.0
 
 ### Major Changes
