@@ -56,21 +56,32 @@ const schemas = {
   [ClaimType.Rule]: ruleSchema,
 };
 
+type PrologExtractionResult =
+  | { fact: string; type: ClaimType; error?: undefined }
+  | { fact?: undefined; type?: undefined; error: string };
+
 export const extractPrologStatement = (
   verifiableCredential: any,
-): { fact: string; type: ClaimType } | null => {
-  const credentialSubject = (verifiableCredential as any).credentialSubject;
-  if (!credentialSubject || typeof credentialSubject.claimType !== "string") {
-    console.error("Invalid credential subject: missing or invalid claimType");
-    return null;
+): PrologExtractionResult => {
+  const credentialSubject = (verifiableCredential as any)?.credentialSubject;
+  if (!credentialSubject) {
+    return {
+      error:
+        "Verifiable credential must contain a 'credentialSubject' property.",
+    };
+  }
+
+  if (typeof credentialSubject.claimType !== "string") {
+    return {
+      error: "Credential subject must contain a string property 'claimType'.",
+    };
   }
 
   const claimType = credentialSubject.claimType as ClaimType;
   const schema = schemas[claimType];
 
   if (!schema) {
-    console.error(`Unknown claimType: ${claimType}`);
-    return null;
+    return { error: `Unknown or unsupported claimType: '${claimType}'.` };
   }
 
   const ajv = new Ajv();
@@ -78,8 +89,11 @@ export const extractPrologStatement = (
   const valid = validate(credentialSubject);
 
   if (!valid) {
-    console.error(`Invalid ${claimType} claim:`, validate.errors);
-    return null;
+    const errorDetails =
+      validate.errors
+        ?.map((e) => `${e.instancePath || "claim"} ${e.message}`)
+        .join(", ") || "unknown validation error";
+    return { error: `Invalid '${claimType}' claim: ${errorDetails}.` };
   }
 
   let fact = "";
@@ -140,6 +154,12 @@ export const extractPrologStatement = (
       const ruleBody = jsonToProlog(credentialSubject.evaluate);
       fact = `${ruleName}(${variables}) :- ${ruleBody}`;
       break;
+  }
+
+  if (fact === "") {
+    return {
+      error: `Could not generate a Prolog fact for claimType '${claimType}'.`,
+    };
   }
 
   if (credentialSubject.updateView === "retract") {
