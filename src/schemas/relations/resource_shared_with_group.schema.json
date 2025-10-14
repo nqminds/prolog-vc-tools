@@ -10,7 +10,7 @@
     "group_id": { "type": "string" },
     "updateView": {
       "type": "string",
-      "enum": ["assert", "retract"],
+      "enum": ["assert", "retract", "assertz", "asserta"],
       "default": "assert"
     }
   },

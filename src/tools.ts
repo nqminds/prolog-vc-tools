@@ -162,11 +162,17 @@ export const extractPrologStatement = (
     };
   }
 
-  if (credentialSubject.updateView === "retract") {
-    return { fact: `retract(${fact}).`, type: claimType };
-  } else if (credentialSubject.updateView === "assert") {
-    return { fact: `assertz(${fact}).`, type: claimType };
+  switch (credentialSubject.updateView) {
+    case "assert":
+      return { fact: `assert(${fact}).`, type: claimType };
+    case "assertz":
+      return { fact: `assertz(${fact}).`, type: claimType };
+    case "asserta":
+      return { fact: `asserta(${fact}).`, type: claimType };
+    case "retract":
+      return { fact: `retract(${fact}).`, type: claimType };
   }
+
   return { fact: `${fact}`, type: claimType };
 };
 
