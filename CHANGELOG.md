@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 3.0.2
+
+### Patch Changes
+
+- 5e5c925: Making sure dist is up to date
+
 ## 3.0.1
 
 ### Patch Changes

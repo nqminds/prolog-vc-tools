@@ -187,14 +187,28 @@ describe("extractPrologStatement", () => {
     });
   });
 
-  test("should return null for invalid credential subject", () => {
+  test("should return an error for invalid credential subject", () => {
     const vc = { credentialSubject: { claimType: "invalid" } };
-    expect(extractPrologStatement(vc)).toBeNull();
+    const result = extractPrologStatement(vc);
+    expect(result).toEqual({
+      error: "Unknown or unsupported claimType: 'invalid'.",
+    });
   });
 
-  test("should return null for missing credential subject", () => {
-    const vc = {};
-    expect(extractPrologStatement(vc)).toBeNull();
+  test("should return an error for non-string claimType", () => {
+    const vc = { credentialSubject: { claimType: 123 } };
+    const result = extractPrologStatement(vc);
+    expect(result).toEqual({
+      error: "Credential subject must contain a string property 'claimType'.",
+    });
+  });
+
+  test("should return an error for credential subject that doesn't match schema", () => {
+    const vc = { credentialSubject: { claimType: ClaimType.Person } };
+    const result = extractPrologStatement(vc);
+    expect(result).toEqual({
+      error: "Invalid 'person' claim: claim must have required property 'id'.",
+    });
   });
 });
 
