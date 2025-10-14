@@ -61,7 +61,7 @@ Given the following VC:
 The library will generate the following Prolog fact:
 
 ```prolog
-assertz(person(person1)).
+assert(person(person1)).
 ```
 
 ### Example: Asserting a Rule
@@ -89,7 +89,7 @@ Given the following VC:
 The library will generate the following Prolog rule:
 
 ```prolog
-assertz(my_rule(X) :- (p(a), q(b))).
+assert(my_rule(X) :- (p(a), q(b))).
 ```
 
 ## Usage
