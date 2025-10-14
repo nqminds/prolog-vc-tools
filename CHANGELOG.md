@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 4.0.0
+
+### Major Changes
+
+- 046dba6: Added error return object
+
 ## 3.0.2
 
 ### Patch Changes
