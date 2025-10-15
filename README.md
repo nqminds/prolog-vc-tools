@@ -4,26 +4,46 @@ This library provides a set of tools for converting Verifiable Credentials (VCs)
 
 ## Core Concepts
 
-The library is built around a set of schemas that define the structure of the VCs. These schemas represent the core concepts of a system that could be built using this library.
+The library is built around a set of schemas that define the structure of the VCs. These schemas represent the core concepts of a system that could be built using this library. Below are the categories of statements that get constructed using the VCs that implement the corressponding schema.
 
 ### Group
 
 - **Group:** Represents a collection of users.
+
+```prolog
+assert(group(exampleGroupId)).
+```
+
 - **Group Custom Property:** Allows for adding arbitrary properties to a group.
+
+```prolog
+assert(group_name(exampleGroupId, "admin")).
+```
 
 ### Person
 
 - **Person:** Represents a user in the system.
+
+```prolog
+assert(person(personId)).
+```
+
 - **Person Custom Property:** Allows for adding arbitrary properties to a person.
 
-### Query
-
-- **Query:** Represents a query to the Prolog system.
-- **Query Custom:** Represents a custom query using raw Prolog.
+```prolog
+assert(person_name(personId, "John")).
+```
 
 ### Relations
 
+These are pre-defined rules that provide relations between our existing entities.
+
 - **Person Belongs to Group:** A relationship that links a person to a group.
+
+```prolog
+assert(person_belongs_to_group(person1, group1))."
+```
+
 - **Resource Owned By Person:** A relationship that indicates a person owns a resource.
 - **Resource Shared With Person:** A relationship that indicates a resource is shared with a person.
 - **Resource Shared With Group:** A relationship that indicates a resource is shared with a group.
@@ -39,6 +59,20 @@ The library is built around a set of schemas that define the structure of the VC
 
 - **Rule:** Defines a custom rule using a JSON-based logic structure.
 - **Rule Custom:** Defines a custom rule using raw Prolog.
+
+### Query
+
+- **Query:** Represents a query to the Prolog system.
+
+```prolog
+person_name(Person, "John").
+```
+
+- **Query Custom:** Represents a custom query using raw Prolog.
+
+```prolog
+person_name(Person, "John").
+```
 
 ## How it Works
 
