@@ -116,6 +116,56 @@ parent(john, mary).
 parent(john, X).
 ```
 
+## Claim Types
+
+The `claimType` property in the credential subject of a VC is used to determine which schema to validate against and how to generate the Prolog statement. The possible values for `claimType` are defined by the `ClaimType` enum:
+
+### Group
+
+| Claim Type              | Description                    |
+| ----------------------- | ------------------------------ |
+| `group`                 | Represents a group of users.   |
+| `group_custom_property` | A custom property for a group. |
+
+### Person
+
+| Claim Type               | Description                      |
+| ------------------------ | -------------------------------- |
+| `person`                 | Represents a user in the system. |
+| `person_custom_property` | A custom property for a person.  |
+
+### Relations
+
+| Claim Type                    | Description                                                       |
+| ----------------------------- | ----------------------------------------------------------------- |
+| `person_belongs_to_group`     | A relationship that links a person to a group.                    |
+| `resource_owned_by_person`    | A relationship that indicates a person owns a resource.           |
+| `resource_shared_with_group`  | A relationship that indicates a resource is shared with a group.  |
+| `resource_shared_with_person` | A relationship that indicates a resource is shared with a person. |
+| `resource_contained_in`       | A relationship that links a resource to a folder.                 |
+
+### Resource
+
+| Claim Type | Description                            |
+| ---------- | -------------------------------------- |
+| `resource` | A generic entity that can be accessed. |
+| `file`     | Labels a resource as a file.           |
+| `folder`   | Labels a resource as a folder.         |
+
+### Rules
+
+| Claim Type    | Description                                               |
+| ------------- | --------------------------------------------------------- |
+| `rule`        | Defines a custom rule using a JSON-based logic structure. |
+| `rule_custom` | Defines a custom rule using raw Prolog.                   |
+
+### Query
+
+| Claim Type     | Description                              |
+| -------------- | ---------------------------------------- |
+| `query`        | Represents a query to the Prolog system. |
+| `query_custom` | A custom query using raw Prolog.         |
+
 ## How it Works
 
 The library takes a VC as input, validates it against the corresponding schema, and then converts it into a Prolog fact or rule. These facts and rules can then be asserted into a Prolog engine to build a knowledge base.
