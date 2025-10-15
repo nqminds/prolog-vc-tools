@@ -18,6 +18,9 @@ import ruleSchema from "./schemas/rules/rule.schema.json" with { type: "json" };
 import { Ajv } from "ajv";
 import SWIPL from "swipl-wasm";
 
+/**
+ * Enum representing the different types of supported claims that can be processed.
+ */
 export enum ClaimType {
   QueryCustom = "query_custom",
   PersonCustomProperty = "person_custom_property",
@@ -37,6 +40,9 @@ export enum ClaimType {
   Rule = "rule",
 }
 
+/**
+ * A mapping of ClaimType values to their corresponding JSON schemas.
+ */
 const schemas = {
   [ClaimType.QueryCustom]: queryCustomSchema,
   [ClaimType.PersonCustomProperty]: personCustomPropertySchema,
@@ -55,11 +61,18 @@ const schemas = {
   [ClaimType.RuleCustom]: ruleCustomSchema,
   [ClaimType.Rule]: ruleSchema,
 };
-
-type PrologExtractionResult =
+/**
+ * The result of attempting to extract a Prolog statement from a verifiable credential.
+ */
+export type PrologExtractionResult =
   | { fact: string; type: ClaimType; error?: undefined }
   | { fact?: undefined; type?: undefined; error: string };
 
+/**
+ * Extracts a prolog statement string from a verifiable credential that is of a supported schema.
+ * @param verifiableCredential A verifiable credential object containing a credentialSubject with a claimType.
+ * @returns An object containing either a Prolog fact string and its claim type, or an error message.
+ */
 export const extractPrologStatement = (
   verifiableCredential: any,
 ): PrologExtractionResult => {
@@ -190,6 +203,12 @@ const jsonToProlog = (evaluate: any): string => {
   return "";
 };
 
+/**
+ * Validates a Prolog statement string by attempting to assert it in the Prolog engine.
+ * @deprecated Not sure this is going to be reliable enough to use in the "custom prolog statement" use case.
+ * @param statement A Prolog statement string to validate.
+ * @returns True if the statement is valid, false otherwise.
+ */
 export const isStringValidTerm = async (
   statement: string,
 ): Promise<boolean> => {
