@@ -61,8 +61,10 @@ const schemas = {
   [ClaimType.RuleCustom]: ruleCustomSchema,
   [ClaimType.Rule]: ruleSchema,
 };
-
-type PrologExtractionResult =
+/**
+ * The result of attempting to extract a Prolog statement from a verifiable credential.
+ */
+export type PrologExtractionResult =
   | { fact: string; type: ClaimType; error?: undefined }
   | { fact?: undefined; type?: undefined; error: string };
 
