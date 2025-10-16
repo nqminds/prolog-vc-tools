@@ -1,6 +1,7 @@
 # Prolog VC Tools
 
 This library provides a set of tools for converting Verifiable Credentials (VCs) into Prolog facts and rules. This allows for expressive and powerful policy-based access control and other logic-based systems to be built on top of a verifiable data model.
+[Docs](https://nqminds.github.io/prolog-vc-tools/)
 
 ## How it Works
 
