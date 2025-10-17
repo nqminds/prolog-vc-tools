@@ -10,9 +10,8 @@
     "group_id": { "type": "string", "description": "Group's ID" },
     "updateView": {
       "type": "string",
-      "enum": ["assert", "retract", "assertz", "asserta"],
-      "default": "assert"
+      "enum": ["assert", "retract", "assertz", "asserta"]
     }
   },
-  "required": ["claimType", "person_id", "group_id", "updateView"]
+  "required": ["claimType", "person_id", "group_id"]
 }

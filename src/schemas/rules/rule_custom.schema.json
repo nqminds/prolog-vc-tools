@@ -9,9 +9,8 @@
     "prolog": { "type": "string", "description": "Prolog rule as a string" },
     "updateView": {
       "type": "string",
-      "enum": ["assert", "retract"],
-      "default": "assert"
+      "enum": ["assert", "retract", "assertz", "asserta"]
     }
   },
-  "required": ["claimType", "prolog", "updateView"]
+  "required": ["claimType", "prolog"]
 }
