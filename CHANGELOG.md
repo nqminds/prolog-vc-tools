@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 5.1.1
+
+### Patch Changes
+
+- 03124c2: Update export
+
 ## 5.1.0
 
 ### Minor Changes
