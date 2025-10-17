@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 5.1.2
+
+### Patch Changes
+
+- d81e908: Update docs
+
 ## 5.1.1
 
 ### Patch Changes
