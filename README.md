@@ -359,7 +359,7 @@ console.log(fact); // assert(person(person1)).
 You can also pass an updateView argument which will override any updateView set in the credentialSubject.
 
 ```typescript
-import { extractPrologStatement } from "prolog-vc-tools";
+import { extractPrologStatement, UpdateView } from "prolog-vc-tools";
 
 const vc = {
   credentialSubject: {
