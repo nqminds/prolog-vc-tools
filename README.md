@@ -2,6 +2,8 @@
 
 This library provides a set of tools for converting Verifiable Credentials (VCs) into Prolog facts and rules. This allows for expressive and powerful policy-based access control and other logic-based systems to be built on top of a verifiable data model.
 
+[Docs](https://nqminds.github.io/prolog-vc-tools/)
+
 ## How it Works
 
 The library takes a VC as input, validates it against the corresponding schema, and then converts it into a Prolog fact or rule. These facts and rules can then be asserted into a Prolog engine to build a knowledge base.
@@ -138,7 +140,7 @@ Here is the schema for a VC's credentialSubject for a rule.
 }
 ```
 
-Which is a bit complicated but let's us chain and embed multiple rules with ANDs, ORs and NOTs.
+Which is a bit complicated but lets us chain and embed multiple rules with ANDs, ORs and NOTs.
 
 So following that schema we can construct this VC:
 
