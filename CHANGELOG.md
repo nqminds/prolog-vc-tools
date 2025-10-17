@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 5.1.0
+
+### Minor Changes
+
+- ae56fe1: Add updateView parameter to customise the updateView wrapping
+
 ## 5.0.2
 
 ### Patch Changes
