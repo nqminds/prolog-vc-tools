@@ -68,6 +68,10 @@ export type PrologExtractionResult =
   | { fact: string; type: ClaimType; error?: undefined }
   | { fact?: undefined; type?: undefined; error: string };
 
+/**
+ * Enum representing the different update views for Prolog statements.
+ * When passed in as an argument, this takes precedence over any updateView specified in the verifiable credential.
+ */
 export enum UpdateView {
   Assert = "assert",
   Asserta = "asserta",
@@ -78,6 +82,7 @@ export enum UpdateView {
 /**
  * Extracts a prolog statement string from a verifiable credential that is of a supported schema.
  * @param verifiableCredential A verifiable credential object containing a credentialSubject with a claimType.
+ * @param updateView Optional. An UpdateView value that specifies how to wrap the Prolog fact (e.g., assert, retract). This takes precedence over any updateView specified in the verifiable credential.
  * @returns An object containing either a Prolog fact string and its claim type, or an error message.
  */
 export const extractPrologStatement = (
