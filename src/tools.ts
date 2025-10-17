@@ -68,6 +68,13 @@ export type PrologExtractionResult =
   | { fact: string; type: ClaimType; error?: undefined }
   | { fact?: undefined; type?: undefined; error: string };
 
+export enum UpdateView {
+  Assert = "assert",
+  Asserta = "asserta",
+  Assertz = "assertz",
+  Retract = "retract",
+}
+
 /**
  * Extracts a prolog statement string from a verifiable credential that is of a supported schema.
  * @param verifiableCredential A verifiable credential object containing a credentialSubject with a claimType.
@@ -75,6 +82,7 @@ export type PrologExtractionResult =
  */
 export const extractPrologStatement = (
   verifiableCredential: any,
+  updateView?: UpdateView,
 ): PrologExtractionResult => {
   const credentialSubject = (verifiableCredential as any)?.credentialSubject;
   if (!credentialSubject) {
@@ -108,6 +116,11 @@ export const extractPrologStatement = (
         .join(", ") || "unknown validation error";
     return { error: `Invalid '${claimType}' claim: ${errorDetails}.` };
   }
+
+  let updateViewToUse =
+    updateView ||
+    verifiableCredential.credentialSubject.updateView ||
+    UpdateView.Assert;
 
   let fact = "";
   switch (claimType) {
@@ -175,7 +188,14 @@ export const extractPrologStatement = (
     };
   }
 
-  switch (credentialSubject.updateView) {
+  const shouldWrapWithUpdateView =
+    ClaimType.QueryCustom !== claimType && ClaimType.Query !== claimType;
+
+  if (!shouldWrapWithUpdateView) {
+    return { fact: `${fact}`, type: claimType };
+  }
+
+  switch (updateViewToUse) {
     case "assert":
       return { fact: `assert(${fact}).`, type: claimType };
     case "assertz":
@@ -184,9 +204,11 @@ export const extractPrologStatement = (
       return { fact: `asserta(${fact}).`, type: claimType };
     case "retract":
       return { fact: `retract(${fact}).`, type: claimType };
+    default:
+      return {
+        error: `Unknown updateView action: '${updateViewToUse}'.`,
+      };
   }
-
-  return { fact: `${fact}`, type: claimType };
 };
 
 const jsonToProlog = (evaluate: any): string => {

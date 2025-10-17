@@ -10,9 +10,8 @@
     "folder_id": { "type": "string" },
     "updateView": {
       "type": "string",
-      "enum": ["assert", "retract"],
-      "default": "assert"
+      "enum": ["assert", "retract", "assertz", "asserta"]
     }
   },
-  "required": ["claimType", "resource_id", "folder_id", "updateView"]
+  "required": ["claimType", "resource_id", "folder_id"]
 }

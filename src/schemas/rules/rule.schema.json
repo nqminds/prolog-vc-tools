@@ -15,18 +15,10 @@
     "returns": { "enum": ["boolean"] },
     "updateView": {
       "type": "string",
-      "enum": ["assert", "retract"],
-      "default": "assert"
+      "enum": ["assert", "retract", "assertz", "asserta"]
     }
   },
-  "required": [
-    "claimType",
-    "name",
-    "evaluate",
-    "variables",
-    "returns",
-    "updateView"
-  ],
+  "required": ["claimType", "name", "evaluate", "variables", "returns"],
 
   "$defs": {
     "logicNode": {

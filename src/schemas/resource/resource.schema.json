@@ -9,9 +9,8 @@
     "id": { "type": "string" },
     "updateView": {
       "type": "string",
-      "enum": ["assert", "retract"],
-      "default": "assert"
+      "enum": ["assert", "retract"]
     }
   },
-  "required": ["claimType", "id", "updateView"]
+  "required": ["claimType", "id"]
 }
