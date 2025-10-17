@@ -356,6 +356,24 @@ const { fact, type } = extractPrologStatement(vc);
 console.log(fact); // assert(person(person1)).
 ```
 
+You can also pass an updateView argument which will override any updateView set in the credentialSubject.
+
+```typescript
+import { extractPrologStatement } from "prolog-vc-tools";
+
+const vc = {
+  credentialSubject: {
+    claimType: "person",
+    id: "person1",
+    updateView: "assert",
+  },
+};
+
+const { fact, type } = extractPrologStatement(vc, UpdateView.Retract);
+
+console.log(fact); // retract(person(person1)).
+```
+
 The library also provides a function `isStringValidTerm` to check if a string is a valid Prolog term.
 
 ```typescript
