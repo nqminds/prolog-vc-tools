@@ -140,7 +140,7 @@ Here is the schema for a VC's credentialSubject for a rule.
 }
 ```
 
-Which is a bit complicated but let's us chain and embed multiple rules with ANDs, ORs and NOTs.
+Which is a bit complicated but lets us chain and embed multiple rules with ANDs, ORs and NOTs.
 
 So following that schema we can construct this VC:
 
