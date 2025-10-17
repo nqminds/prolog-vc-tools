@@ -204,6 +204,10 @@ export const extractPrologStatement = (
       return { fact: `asserta(${fact}).`, type: claimType };
     case "retract":
       return { fact: `retract(${fact}).`, type: claimType };
+    default:
+      return {
+        error: `Unknown updateView action: '${updateViewToUse}'.`,
+      };
   }
 };
 

@@ -2,6 +2,7 @@ import {
   extractPrologStatement,
   isStringValidTerm,
   ClaimType,
+  UpdateView,
 } from "../tools.js";
 import { test, describe, expect } from "vitest";
 
@@ -27,6 +28,7 @@ import ruleAllVC from "./inputs/rules/rule_all.json" with { type: "json" };
 import personRetractVC from "./inputs/person/person_retract.json" with { type: "json" };
 import personAssertA from "./inputs/person/person_asserta.json" with { type: "json" };
 import personAssertZ from "./inputs/person/person_assertz.json" with { type: "json" };
+import personNoUpdateViewVC from "./inputs/person/person_no_update_view.json" with { type: "json" };
 
 describe("extractPrologStatement", () => {
   test("should extract prolog fact from person claim", () => {
@@ -224,6 +226,33 @@ describe("extractPrologStatement", () => {
     const result = extractPrologStatement(vc);
     expect(result).toEqual({
       error: "Invalid 'person' claim: claim must have required property 'id'.",
+    });
+  });
+
+  test("should prioritise updateView parameter over credentialSubject property", () => {
+    const result = extractPrologStatement(personVC, UpdateView.Assertz);
+    expect(result).toEqual({
+      fact: "assertz(person(person1)).",
+      type: ClaimType.Person,
+    });
+  });
+
+  test("should use updateView argument when credentialSubject.updateView is missing", () => {
+    const result = extractPrologStatement(
+      personNoUpdateViewVC,
+      UpdateView.Asserta,
+    );
+    expect(result).toEqual({
+      fact: "asserta(person(person1)).",
+      type: ClaimType.Person,
+    });
+  });
+
+  test("should default to assert when updateView is not provided in either updateView argument or credential subject", () => {
+    const result = extractPrologStatement(personNoUpdateViewVC);
+    expect(result).toEqual({
+      fact: "assert(person(person1)).",
+      type: ClaimType.Person,
     });
   });
 });
