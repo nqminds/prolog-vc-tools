@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 5.2.0
+
+### Minor Changes
+
+- a9a7622: Add a custom relation claim type
+
 ## 5.1.2
 
 ### Patch Changes
