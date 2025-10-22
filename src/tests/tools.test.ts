@@ -12,6 +12,7 @@ import personBelongsToGroupVC from "./inputs/relations/person_belongs_to_group.j
 import resourceOwnedByPersonVC from "./inputs/relations/resource_owned_by_person.json" with { type: "json" };
 import resourceSharedWithGroupVC from "./inputs/relations/resource_shared_with_group.json" with { type: "json" };
 import resourceSharedWithPersonVC from "./inputs/relations/resource_shared_with_person.json" with { type: "json" };
+import customRelation from "./inputs/relations/custom_relation.json" with { type: "json" };
 import fileVC from "./inputs/resource/file.json" with { type: "json" };
 import folderVC from "./inputs/resource/folder.json" with { type: "json" };
 import resourceVC from "./inputs/resource/resource.json" with { type: "json" };
@@ -68,6 +69,14 @@ describe("extractPrologStatement", () => {
     expect(result).toEqual({
       fact: "assert(resource_shared_with_group(resource1, group1)).",
       type: ClaimType.ResourceSharedWithGroup,
+    });
+  });
+
+  test("should extract prolog fact from custom_relation claim", () => {
+    const result = extractPrologStatement(customRelation);
+    expect(result).toEqual({
+      fact: "assert(trust(person, resource)).",
+      type: ClaimType.RelationCustom,
     });
   });
 
