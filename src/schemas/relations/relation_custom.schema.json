@@ -1,0 +1,21 @@
+{
+  "title": "Custom Relation",
+  "type": "object",
+  "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "relation_custom"
+    },
+    "name": { "type": "string" },
+
+    "variables": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "updateView": {
+      "type": "string",
+      "enum": ["assert", "retract", "assertz", "asserta"]
+    }
+  },
+  "required": ["claimType", "name", "variables"]
+}

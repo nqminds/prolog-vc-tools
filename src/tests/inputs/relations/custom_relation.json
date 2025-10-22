@@ -1,0 +1,8 @@
+{
+  "credentialSubject": {
+    "claimType": "relation_custom",
+    "name": "trust",
+    "variables": ["person", "resource"],
+    "updateView": "assert"
+  }
+}

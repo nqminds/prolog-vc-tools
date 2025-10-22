@@ -8,6 +8,7 @@ import personBelongsToGroupSchema from "./schemas/relations/person_belongs_to_gr
 import resourceOwnedByPersonSchema from "./schemas/relations/resource_owned_by_person.schema.json" with { type: "json" };
 import resourceSharedWithGroupSchema from "./schemas/relations/resource_shared_with_group.schema.json" with { type: "json" };
 import resourceSharedWithPersonSchema from "./schemas/relations/resource_shared_with_person.schema.json" with { type: "json" };
+import relationCustomSchema from "./schemas/relations/relation_custom.schema.json" with { type: "json" };
 import fileSchema from "./schemas/resource/file.schema.json" with { type: "json" };
 import folderSchema from "./schemas/resource/folder.schema.json" with { type: "json" };
 import resourceSchema from "./schemas/resource/resource.schema.json" with { type: "json" };
@@ -32,6 +33,7 @@ export enum ClaimType {
   ResourceOwnedByPerson = "resource_owned_by_person",
   ResourceSharedWithGroup = "resource_shared_with_group",
   ResourceSharedWithPerson = "resource_shared_with_person",
+  RelationCustom = "relation_custom",
   File = "file",
   Folder = "folder",
   Resource = "resource",
@@ -54,6 +56,7 @@ const schemas = {
   [ClaimType.ResourceOwnedByPerson]: resourceOwnedByPersonSchema,
   [ClaimType.ResourceSharedWithGroup]: resourceSharedWithGroupSchema,
   [ClaimType.ResourceSharedWithPerson]: resourceSharedWithPersonSchema,
+  [ClaimType.RelationCustom]: relationCustomSchema,
   [ClaimType.File]: fileSchema,
   [ClaimType.Folder]: folderSchema,
   [ClaimType.Resource]: resourceSchema,
@@ -146,6 +149,15 @@ export const extractPrologStatement = (
       break;
     case ClaimType.ResourceSharedWithPerson:
       fact = `resource_shared_with_person(${credentialSubject.resource_id}, ${credentialSubject.person_id})`;
+      break;
+    case ClaimType.RelationCustom:
+      if (Array.isArray(credentialSubject.variables)) {
+        fact = `${credentialSubject.name}(${credentialSubject.variables.join(", ")})`;
+      } else {
+        return {
+          error: `Invalid 'variables' property for claimType '${claimType}'.`,
+        };
+      }
       break;
     case ClaimType.File:
       fact = `file(${credentialSubject.resource_id})`;
