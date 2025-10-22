@@ -234,6 +234,12 @@ assert(resource_shared_with_group(resource1, group1)).
 assert(resource_contained_in(resource1, folder1)).
 ```
 
+- **Custom Relation:** A relationship that links a resource to a folder.
+
+```prolog
+assert(trust(person, resource)).
+```
+
 ### Resource
 
 - **Resource:** A generic entity that can be accessed.
@@ -309,6 +315,7 @@ The `claimType` property in the credential subject of a VC is used to determine 
 | `resource_shared_with_group`  | A relationship that indicates a resource is shared with a group.  |
 | `resource_shared_with_person` | A relationship that indicates a resource is shared with a person. |
 | `resource_contained_in`       | A relationship that links a resource to a folder.                 |
+| `relation_custom`             | A custom relationship.                                            |
 
 ### Resource
 
