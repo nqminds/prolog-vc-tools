@@ -1,0 +1,7 @@
+{
+  "credentialSubject": {
+    "claimType": "entity_group",
+    "id": "manufacturers",
+    "updateView": "assert"
+  }
+}

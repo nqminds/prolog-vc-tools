@@ -176,29 +176,8 @@
             structure of the VCs. These schemas represent the core concepts of a
             system that could be built using this library. Below are the
             categories of statements that get constructed using the VCs that
-            implement the corressponding schema.
+            implement the corresponding schema.
           </p>
-          <h3 id="group" class="tsd-anchor-link">
-            Group<a href="#group" aria-label="Permalink" class="tsd-anchor-icon"
-              ><svg viewBox="0 0 24 24" aria-hidden="true">
-                <use href="assets/icons.svg#icon-anchor"></use></svg
-            ></a>
-          </h3>
-          <ul>
-            <li><strong>Group:</strong> Represents a collection of users.</li>
-          </ul>
-          <pre><code class="prolog"><span class="hl-3">assert</span><span class="hl-0">(group(exampleGroupId))</span><span class="hl-4">.</span>
-</code><button type="button">Copy</button></pre>
-
-          <ul>
-            <li>
-              <strong>Group Custom Property:</strong> Allows for adding
-              arbitrary properties to a group.
-            </li>
-          </ul>
-          <pre><code class="prolog"><span class="hl-3">assert</span><span class="hl-0">(group_custom_property(group1, department, engineering))</span><span class="hl-4">.</span>
-</code><button type="button">Copy</button></pre>
-
           <h3 id="person" class="tsd-anchor-link">
             Person<a
               href="#person"
@@ -220,7 +199,78 @@
               arbitrary properties to a person.
             </li>
           </ul>
-          <pre><code class="prolog"><span class="hl-3">assert</span><span class="hl-0">(person_x(person1, age, </span><span class="hl-6">30</span><span class="hl-0">))</span><span class="hl-4">.</span>
+          <pre><code class="prolog"><span class="hl-3">assert</span><span class="hl-0">(person_custom_property(person1, age, </span><span class="hl-6">30</span><span class="hl-0">))</span><span class="hl-4">.</span>
+</code><button type="button">Copy</button></pre>
+
+          <h3 id="group" class="tsd-anchor-link">
+            Group<a href="#group" aria-label="Permalink" class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h3>
+          <ul>
+            <li><strong>Group:</strong> Represents a collection of people.</li>
+          </ul>
+          <pre><code class="prolog"><span class="hl-3">assert</span><span class="hl-0">(group(exampleGroupId))</span><span class="hl-4">.</span>
+</code><button type="button">Copy</button></pre>
+
+          <ul>
+            <li>
+              <strong>Group Custom Property:</strong> Allows for adding
+              arbitrary properties to a group.
+            </li>
+          </ul>
+          <pre><code class="prolog"><span class="hl-3">assert</span><span class="hl-0">(group_custom_property(group1, department, engineering))</span><span class="hl-4">.</span>
+</code><button type="button">Copy</button></pre>
+
+          <h3 id="entity" class="tsd-anchor-link">
+            Entity<a
+              href="#entity"
+              aria-label="Permalink"
+              class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h3>
+          <ul>
+            <li><strong>Entity</strong> Represents a more abstract entity.</li>
+          </ul>
+          <pre><code class="prolog"><span class="hl-3">assert</span><span class="hl-0">(entity(entityId))</span><span class="hl-4">.</span>
+</code><button type="button">Copy</button></pre>
+
+          <ul>
+            <li>
+              <strong>Entity Custom Property:</strong> Allows for adding
+              arbitrary properties to an entity.
+            </li>
+          </ul>
+          <pre><code class="prolog"><span class="hl-3">assert</span><span class="hl-0">(entity_custom_property(entityId, property, value))</span><span class="hl-4">.</span>
+</code><button type="button">Copy</button></pre>
+
+          <h3 id="entity-group" class="tsd-anchor-link">
+            Entity Group<a
+              href="#entity-group"
+              aria-label="Permalink"
+              class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h3>
+          <ul>
+            <li>
+              <strong>Entity Group:</strong> Reresents a collection of entities.
+            </li>
+          </ul>
+          <pre><code class="prolog"><span class="hl-3">assert</span><span class="hl-0">(entity_group(entityGroupId))</span><span class="hl-4">.</span>
+</code><button type="button">Copy</button></pre>
+
+          <ul>
+            <li>
+              <strong>Entity Group Custom Property:</strong> Allows for adding
+              arbitrary properties to an entity group.
+            </li>
+          </ul>
+          <pre><code class="prolog"><span class="hl-3">assert</span><span class="hl-0">(entity_group_custom_property(entity_group_id, property, value))</span><span class="hl-4">.</span>
 </code><button type="button">Copy</button></pre>
 
           <h3 id="relations" class="tsd-anchor-link">
@@ -288,6 +338,12 @@
             </li>
           </ul>
           <pre><code class="prolog"><span class="hl-3">assert</span><span class="hl-0">(trust(person, resource))</span><span class="hl-4">.</span>
+</code><button type="button">Copy</button></pre>
+
+          <ul>
+            <li><strong>Entity Belongs to Entity Group</strong></li>
+          </ul>
+          <pre><code class="prolog"><span class="hl-3">assert</span><span class="hl-0">(entity_belongs_to_entity_group(entityID, entityGroupID))</span><span class="hl-4">.</span>
 </code><button type="button">Copy</button></pre>
 
           <h3 id="resource" class="tsd-anchor-link">
@@ -383,33 +439,6 @@
             <code>claimType</code> are defined by the
             <code>ClaimType</code> enum:
           </p>
-          <h3 id="group-1" class="tsd-anchor-link">
-            Group<a
-              href="#group-1"
-              aria-label="Permalink"
-              class="tsd-anchor-icon"
-              ><svg viewBox="0 0 24 24" aria-hidden="true">
-                <use href="assets/icons.svg#icon-anchor"></use></svg
-            ></a>
-          </h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Claim Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>group</code></td>
-                <td>Represents a group of users.</td>
-              </tr>
-              <tr>
-                <td><code>group_custom_property</code></td>
-                <td>A custom property for a group.</td>
-              </tr>
-            </tbody>
-          </table>
           <h3 id="person-1" class="tsd-anchor-link">
             Person<a
               href="#person-1"
@@ -437,6 +466,60 @@
               </tr>
             </tbody>
           </table>
+          <h3 id="group-1" class="tsd-anchor-link">
+            Group<a
+              href="#group-1"
+              aria-label="Permalink"
+              class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Claim Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>group</code></td>
+                <td>Represents a group of people.</td>
+              </tr>
+              <tr>
+                <td><code>group_custom_property</code></td>
+                <td>A custom property for a group.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 id="entity-1" class="tsd-anchor-link">
+            Entity<a
+              href="#entity-1"
+              aria-label="Permalink"
+              class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Claim Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>entity</code></td>
+                <td>Represents a entity in the system.</td>
+              </tr>
+              <tr>
+                <td><code>entity_custom_property</code></td>
+                <td>A custom property for an entity.</td>
+              </tr>
+            </tbody>
+          </table>
           <h3 id="relations-1" class="tsd-anchor-link">
             Relations<a
               href="#relations-1"
@@ -456,29 +539,27 @@
             <tbody>
               <tr>
                 <td><code>person_belongs_to_group</code></td>
-                <td>A relationship that links a person to a group.</td>
+                <td>Links a person to a group.</td>
               </tr>
               <tr>
                 <td><code>resource_owned_by_person</code></td>
-                <td>A relationship that indicates a person owns a resource.</td>
+                <td>Indicates a person owns a resource.</td>
               </tr>
               <tr>
                 <td><code>resource_shared_with_group</code></td>
-                <td>
-                  A relationship that indicates a resource is shared with a
-                  group.
-                </td>
+                <td>Indicates a resource is shared with a group.</td>
               </tr>
               <tr>
                 <td><code>resource_shared_with_person</code></td>
-                <td>
-                  A relationship that indicates a resource is shared with a
-                  person.
-                </td>
+                <td>Indicates a resource is shared with a person.</td>
               </tr>
               <tr>
                 <td><code>resource_contained_in</code></td>
-                <td>A relationship that links a resource to a folder.</td>
+                <td>Links a resource to a folder.</td>
+              </tr>
+              <tr>
+                <td><code>entity_belongs_to_entity_group</code></td>
+                <td>Links an entity to an entity group.</td>
               </tr>
               <tr>
                 <td><code>relation_custom</code></td>
@@ -621,9 +702,9 @@
                 <use href="assets/icons.svg#icon-anchor"></use></svg
             ></a>
           </h2>
-          <h3 id="demo-application" class="tsd-anchor-link">
-            Demo Application<a
-              href="#demo-application"
+          <h3 id="demo-applications" class="tsd-anchor-link">
+            Demo Applications<a
+              href="#demo-applications"
               aria-label="Permalink"
               class="tsd-anchor-icon"
               ><svg viewBox="0 0 24 24" aria-hidden="true">
@@ -631,16 +712,17 @@
             ></a>
           </h3>
           <p>
-            A demo application that implements this can be found here:
-            <a href="https://github.com/nqminds/prolog-vc-tools-app"
-              >prolog-vc-tools-app</a
+            An application with multiple example implementations of systems
+            using this library can be found here:
+            <a href="https://github.com/nqminds/policy-use-cases"
+              >policy-use-cases</a
             >.
           </p>
           <p>
-            This implements some file-folder relations and implements a
-            <code>permitted</code> rules and query that the system uses to
-            determine whether a user has permissions to access a particular
-            resource.
+            A demo application that implements this library can be found here:
+            <a href="https://github.com/nqminds/prolog-vc-tools-app"
+              >prolog-vc-tools-app</a
+            >.
           </p>
           <h3 id="schemas" class="tsd-anchor-link">
             Schemas<a
@@ -853,10 +935,18 @@
                 <li>
                   <ul>
                     <li>
+                      <a href="#person"><span>Person</span></a>
+                    </li>
+                    <li>
                       <a href="#group"><span>Group</span></a>
                     </li>
                     <li>
-                      <a href="#person"><span>Person</span></a>
+                      <a href="#entity"><span>Entity</span></a>
+                    </li>
+                    <li>
+                      <a href="#entity-group"
+                        ><span>Entity <wbr />Group</span></a
+                      >
                     </li>
                     <li>
                       <a href="#relations"><span>Relations</span></a>
@@ -880,10 +970,13 @@
                 <li>
                   <ul>
                     <li>
+                      <a href="#person-1"><span>Person</span></a>
+                    </li>
+                    <li>
                       <a href="#group-1"><span>Group</span></a>
                     </li>
                     <li>
-                      <a href="#person-1"><span>Person</span></a>
+                      <a href="#entity-1"><span>Entity</span></a>
                     </li>
                     <li>
                       <a href="#relations-1"><span>Relations</span></a>
@@ -913,8 +1006,8 @@
                 <li>
                   <ul>
                     <li>
-                      <a href="#demo-application"
-                        ><span>Demo <wbr />Application</span></a
+                      <a href="#demo-applications"
+                        ><span>Demo <wbr />Applications</span></a
                       >
                     </li>
                     <li>

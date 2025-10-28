@@ -1,0 +1,9 @@
+{
+  "credentialSubject": {
+    "claimType": "entity_group_custom_property",
+    "id": "samsung",
+    "property": "employee_count",
+    "value": "30",
+    "updateView": "assert"
+  }
+}

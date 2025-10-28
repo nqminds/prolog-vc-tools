@@ -1,0 +1,17 @@
+{
+  "title": "Entity Belongs to Entity Group",
+  "type": "object",
+  "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "entity_belongs_to_entity_group"
+    },
+    "entity_id": { "type": "string", "description": "Entity's ID" },
+    "entity_group_id": { "type": "string", "description": "Entity group's ID" },
+    "updateView": {
+      "type": "string",
+      "enum": ["assert", "retract", "assertz", "asserta"]
+    }
+  },
+  "required": ["claimType", "entity_id", "entity_group_id"]
+}

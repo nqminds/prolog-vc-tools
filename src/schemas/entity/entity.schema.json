@@ -1,0 +1,16 @@
+{
+  "title": "Entity",
+  "type": "object",
+  "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "entity"
+    },
+    "id": { "type": "string", "description": "Entity's ID" },
+    "updateView": {
+      "type": "string",
+      "enum": ["assert", "retract", "assertz", "asserta"]
+    }
+  },
+  "required": ["claimType", "id"]
+}

@@ -1,0 +1,18 @@
+{
+  "title": "Entity Group Property",
+  "type": "object",
+  "properties": {
+    "claimType": {
+      "type": "string",
+      "const": "entity_group_custom_property"
+    },
+    "property": { "type": "string" },
+    "value": { "type": "string" },
+    "id": { "type": "string", "description": "Entity group's ID" },
+    "updateView": {
+      "type": "string",
+      "enum": ["assert", "retract", "assertz", "asserta"]
+    }
+  },
+  "required": ["claimType", "property", "value", "id"]
+}
