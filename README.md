@@ -208,12 +208,24 @@ assert(group_custom_property(group1, department, engineering)).
 assert(entity(entityId)).
 ```
 
+- **Entity Custom Property:** Allows for adding arbitrary properties to an entity.
+
+```prolog
+assert(entity_custom_property(entityId, property, value)).
+```
+
 ### Entity Group
 
 - **Entity Group:** Reresents a collection of entities.
 
 ```prolog
 assert(entity_group(entityGroupId)).
+```
+
+- **Entity Group Custom Property:** Allows for adding arbitrary properties to an entity group.
+
+```prolog
+assert(entity_group_custom_property(entity_group_id, property, value)).
 ```
 
 ### Relations
