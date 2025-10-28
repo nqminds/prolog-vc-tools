@@ -1,0 +1,7 @@
+{
+  "credentialSubject": {
+    "claimType": "entity",
+    "id": "entity1",
+    "updateView": "assert"
+  }
+}

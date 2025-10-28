@@ -1,0 +1,8 @@
+{
+  "credentialSubject": {
+    "claimType": "entity_belongs_to_entity_group",
+    "entity_id": "samsung",
+    "entity_group_id": "manufacturers",
+    "updateView": "assert"
+  }
+}

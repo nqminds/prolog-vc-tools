@@ -15,7 +15,11 @@ import resourceSchema from "./schemas/resource/resource.schema.json" with { type
 import resourceContainedInSchema from "./schemas/resource/resource_contained_in.schema.json" with { type: "json" };
 import ruleCustomSchema from "./schemas/rules/rule_custom.schema.json" with { type: "json" };
 import ruleSchema from "./schemas/rules/rule.schema.json" with { type: "json" };
-
+import entitySchema from "./schemas/entity/entity.schema.json" with { type: "json" };
+import entityGroupSchema from "./schemas/entity_group/entity_group.schema.json" with { type: "json" };
+import entityCustomSchema from "./schemas/entity/entity_custom_property.schema.json" with { type: "json" };
+import entityGroupCustomSchema from "./schemas/entity_group/entity_group_custom_property.schema.json" with { type: "json" };
+import entityBelongsToEntityGroupSchema from "./schemas/relations/entity_belongs_to_entity_group.schema.json" with { type: "json" };
 import { Ajv } from "ajv";
 import SWIPL from "swipl-wasm";
 
@@ -40,6 +44,11 @@ export enum ClaimType {
   ResourceContainedIn = "resource_contained_in",
   RuleCustom = "rule_custom",
   Rule = "rule",
+  Entity = "entity",
+  EntityGroup = "entity_group",
+  EntityCustomProperty = "entity_custom_property",
+  EntityGroupCustomProperty = "entity_group_custom_property",
+  EntityBelongsToEntityGroup = "entity_belongs_to_entity_group",
 }
 
 /**
@@ -63,6 +72,11 @@ const schemas = {
   [ClaimType.ResourceContainedIn]: resourceContainedInSchema,
   [ClaimType.RuleCustom]: ruleCustomSchema,
   [ClaimType.Rule]: ruleSchema,
+  [ClaimType.Entity]: entitySchema,
+  [ClaimType.EntityGroup]: entityGroupSchema,
+  [ClaimType.EntityCustomProperty]: entityCustomSchema,
+  [ClaimType.EntityGroupCustomProperty]: entityGroupCustomSchema,
+  [ClaimType.EntityBelongsToEntityGroup]: entityBelongsToEntityGroupSchema,
 };
 /**
  * The result of attempting to extract a Prolog statement from a verifiable credential.
@@ -172,7 +186,7 @@ export const extractPrologStatement = (
       fact = `resource_contained_in(${credentialSubject.resource_id}, ${credentialSubject.folder_id})`;
       break;
     case ClaimType.PersonCustomProperty:
-      fact = `person_x(${credentialSubject.id}, ${credentialSubject.property}, ${credentialSubject.value})`;
+      fact = `person_custom_property(${credentialSubject.id}, ${credentialSubject.property}, ${credentialSubject.value})`;
       break;
     case ClaimType.GroupCustomProperty:
       fact = `group_custom_property(${credentialSubject.id}, ${credentialSubject.property}, ${credentialSubject.value})`;
@@ -196,6 +210,21 @@ export const extractPrologStatement = (
         : "";
       const ruleBody = jsonToProlog(credentialSubject.evaluate);
       fact = `${ruleName}(${variables}) :- ${ruleBody}`;
+      break;
+    case ClaimType.Entity:
+      fact = `entity(${credentialSubject.id})`;
+      break;
+    case ClaimType.EntityCustomProperty:
+      fact = `entity_custom_property(${credentialSubject.id}, ${credentialSubject.property}, ${credentialSubject.value})`;
+      break;
+    case ClaimType.EntityGroup:
+      fact = `entity_group(${credentialSubject.id})`;
+      break;
+    case ClaimType.EntityGroupCustomProperty:
+      fact = `entity_group_custom_property(${credentialSubject.id}, ${credentialSubject.property}, ${credentialSubject.value})`;
+      break;
+    case ClaimType.EntityBelongsToEntityGroup:
+      fact = `entity_belongs_to_entity_group(${credentialSubject.entity_id}, ${credentialSubject.entity_group_id})`;
       break;
   }
 

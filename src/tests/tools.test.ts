@@ -30,6 +30,11 @@ import personRetractVC from "./inputs/person/person_retract.json" with { type: "
 import personAssertA from "./inputs/person/person_asserta.json" with { type: "json" };
 import personAssertZ from "./inputs/person/person_assertz.json" with { type: "json" };
 import personNoUpdateViewVC from "./inputs/person/person_no_update_view.json" with { type: "json" };
+import entityVC from "./inputs/entity/entity.json" with { type: "json" };
+import entityCustomPropertyVC from "./inputs/entity/entity_custom_property.json" with { type: "json" };
+import entityGroupVC from "./inputs/entity_group/entity_group.json" with { type: "json" };
+import entityGroupCustomPropertyVC from "./inputs/entity_group/entity_group_custom_property.json" with { type: "json" };
+import entityBelongsToEntityGroupVC from "./inputs/relations/entity_belongs_to_entity_group.json" with { type: "json" };
 
 describe("extractPrologStatement", () => {
   test("should extract prolog fact from person claim", () => {
@@ -123,7 +128,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from person_custom_property claim", () => {
     const result = extractPrologStatement(personCustomPropertyVC);
     expect(result).toEqual({
-      fact: "assert(person_x(person1, age, 30)).",
+      fact: "assert(person_custom_property(person1, age, 30)).",
       type: ClaimType.PersonCustomProperty,
     });
   });
@@ -262,6 +267,46 @@ describe("extractPrologStatement", () => {
     expect(result).toEqual({
       fact: "assert(person(person1)).",
       type: ClaimType.Person,
+    });
+  });
+
+  test("should extract prolog fact from entity claim", () => {
+    const result = extractPrologStatement(entityVC);
+    expect(result).toEqual({
+      fact: "assert(entity(entity1)).",
+      type: ClaimType.Entity,
+    });
+  });
+
+  test("should extract prolog fact from entity_custom_property claim", () => {
+    const result = extractPrologStatement(entityCustomPropertyVC);
+    expect(result).toEqual({
+      fact: "assert(entity_custom_property(entity1, mass, 30)).",
+      type: ClaimType.EntityCustomProperty,
+    });
+  });
+
+  test("should extract prolog fact from entity group claim", () => {
+    const result = extractPrologStatement(entityGroupVC);
+    expect(result).toEqual({
+      fact: "assert(entity_group(manufacturers)).",
+      type: ClaimType.EntityGroup,
+    });
+  });
+
+  test("should extract prolog fact from entity_group_custom_property claim", () => {
+    const result = extractPrologStatement(entityGroupCustomPropertyVC);
+    expect(result).toEqual({
+      fact: "assert(entity_group_custom_property(samsung, employee_count, 30)).",
+      type: ClaimType.EntityGroupCustomProperty,
+    });
+  });
+
+  test("should extract prolog fact from entity_belongs_to_entity_group claim", () => {
+    const result = extractPrologStatement(entityBelongsToEntityGroupVC);
+    expect(result).toEqual({
+      fact: "assert(entity_belongs_to_entity_group(samsung, manufacturers)).",
+      type: ClaimType.EntityBelongsToEntityGroup,
     });
   });
 });

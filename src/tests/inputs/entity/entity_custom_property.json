@@ -1,0 +1,9 @@
+{
+  "credentialSubject": {
+    "claimType": "entity_custom_property",
+    "id": "entity1",
+    "property": "mass",
+    "value": "30",
+    "updateView": "assert"
+  }
+}
