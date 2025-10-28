@@ -170,21 +170,7 @@ assert(my_rule(X) :- (p(a), q(b))).
 
 ## Core Entities
 
-The library is built around a set of schemas that define the structure of the VCs. These schemas represent the core concepts of a system that could be built using this library. Below are the categories of statements that get constructed using the VCs that implement the corressponding schema.
-
-### Group
-
-- **Group:** Represents a collection of users.
-
-```prolog
-assert(group(exampleGroupId)).
-```
-
-- **Group Custom Property:** Allows for adding arbitrary properties to a group.
-
-```prolog
-assert(group_custom_property(group1, department, engineering)).
-```
+The library is built around a set of schemas that define the structure of the VCs. These schemas represent the core concepts of a system that could be built using this library. Below are the categories of statements that get constructed using the VCs that implement the corresponding schema.
 
 ### Person
 
@@ -197,7 +183,37 @@ assert(person(personId)).
 - **Person Custom Property:** Allows for adding arbitrary properties to a person.
 
 ```prolog
-assert(person_x(person1, age, 30)).
+assert(person_custom_property(person1, age, 30)).
+```
+
+### Group
+
+- **Group:** Represents a collection of people.
+
+```prolog
+assert(group(exampleGroupId)).
+```
+
+- **Group Custom Property:** Allows for adding arbitrary properties to a group.
+
+```prolog
+assert(group_custom_property(group1, department, engineering)).
+```
+
+### Entity
+
+- **Entity** Represents a more abstract entity.
+
+```prolog
+assert(entity(entityId)).
+```
+
+### Entity Group
+
+- **Entity Group:** Reresents a collection of entities.
+
+```prolog
+assert(entity_group(entityGroupId)).
 ```
 
 ### Relations
@@ -238,6 +254,12 @@ assert(resource_contained_in(resource1, folder1)).
 
 ```prolog
 assert(trust(person, resource)).
+```
+
+- **Entity Belongs to Entity Group**
+
+```prolog
+assert(entity_belongs_to_entity_group(entityID, entityGroupID)).
 ```
 
 ### Resource
@@ -292,13 +314,6 @@ parent(john, X).
 
 The `claimType` property in the credential subject of a VC is used to determine which schema to validate against and how to generate the Prolog statement. The possible values for `claimType` are defined by the `ClaimType` enum:
 
-### Group
-
-| Claim Type              | Description                    |
-| ----------------------- | ------------------------------ |
-| `group`                 | Represents a group of users.   |
-| `group_custom_property` | A custom property for a group. |
-
 ### Person
 
 | Claim Type               | Description                      |
@@ -306,16 +321,31 @@ The `claimType` property in the credential subject of a VC is used to determine 
 | `person`                 | Represents a user in the system. |
 | `person_custom_property` | A custom property for a person.  |
 
+### Group
+
+| Claim Type              | Description                    |
+| ----------------------- | ------------------------------ |
+| `group`                 | Represents a group of people.  |
+| `group_custom_property` | A custom property for a group. |
+
+### Entity
+
+| Claim Type               | Description                        |
+| ------------------------ | ---------------------------------- |
+| `entity`                 | Represents a entity in the system. |
+| `entity_custom_property` | A custom property for an entity.   |
+
 ### Relations
 
-| Claim Type                    | Description                                                       |
-| ----------------------------- | ----------------------------------------------------------------- |
-| `person_belongs_to_group`     | A relationship that links a person to a group.                    |
-| `resource_owned_by_person`    | A relationship that indicates a person owns a resource.           |
-| `resource_shared_with_group`  | A relationship that indicates a resource is shared with a group.  |
-| `resource_shared_with_person` | A relationship that indicates a resource is shared with a person. |
-| `resource_contained_in`       | A relationship that links a resource to a folder.                 |
-| `relation_custom`             | A custom relationship.                                            |
+| Claim Type                       | Description                                   |
+| -------------------------------- | --------------------------------------------- |
+| `person_belongs_to_group`        | Links a person to a group.                    |
+| `resource_owned_by_person`       | Indicates a person owns a resource.           |
+| `resource_shared_with_group`     | Indicates a resource is shared with a group.  |
+| `resource_shared_with_person`    | Indicates a resource is shared with a person. |
+| `resource_contained_in`          | Links a resource to a folder.                 |
+| `entity_belongs_to_entity_group` | Links an entity to an entity group.           |
+| `relation_custom`                | A custom relationship.                        |
 
 ### Resource
 
@@ -393,11 +423,11 @@ console.log(isValid); // true
 
 ## Extra Resources
 
-### Demo Application
+### Demo Applications
 
-A demo application that implements this can be found here: [prolog-vc-tools-app](https://github.com/nqminds/prolog-vc-tools-app).
+An application with multiple example implementations of systems using this library can be found here: [policy-use-cases](https://github.com/nqminds/policy-use-cases).
 
-This implements some file-folder relations and implements a `permitted` rules and query that the system uses to determine whether a user has permissions to access a particular resource.
+A demo application that implements this library can be found here: [prolog-vc-tools-app](https://github.com/nqminds/prolog-vc-tools-app).
 
 ### Schemas
 
