@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 5.3.0
+
+### Minor Changes
+
+- 5a64ac3: Add entity and entity_group and fix person custom property
+
 ## 5.2.0
 
 ### Minor Changes
