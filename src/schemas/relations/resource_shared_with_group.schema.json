@@ -6,6 +6,7 @@
       "type": "string",
       "const": "resource_shared_with_group"
     },
+    "sharer_id": { "type": "string" },
     "resource_id": { "type": "string" },
     "group_id": { "type": "string" },
     "updateView": {
@@ -13,5 +14,5 @@
       "enum": ["assert", "retract", "assertz", "asserta"]
     }
   },
-  "required": ["claimType", "resource_id", "group_id"]
+  "required": ["claimType", "sharer_id", "resource_id", "group_id"]
 }

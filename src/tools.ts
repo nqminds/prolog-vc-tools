@@ -159,10 +159,10 @@ export const extractPrologStatement = (
       fact = `resource_owned_by_person(${credentialSubject.resource_id}, ${credentialSubject.person_id})`;
       break;
     case ClaimType.ResourceSharedWithGroup:
-      fact = `resource_shared_with_group(${credentialSubject.resource_id}, ${credentialSubject.group_id})`;
+      fact = `resource_shared_with_group(${credentialSubject.sharer_id}, ${credentialSubject.resource_id}, ${credentialSubject.group_id})`;
       break;
     case ClaimType.ResourceSharedWithPerson:
-      fact = `resource_shared_with_person(${credentialSubject.resource_id}, ${credentialSubject.person_id})`;
+      fact = `resource_shared_with_person(${credentialSubject.sharer_id}, ${credentialSubject.resource_id}, ${credentialSubject.person_id})`;
       break;
     case ClaimType.RelationCustom:
       if (Array.isArray(credentialSubject.variables)) {

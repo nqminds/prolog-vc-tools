@@ -1,6 +1,7 @@
 {
   "credentialSubject": {
     "claimType": "resource_shared_with_group",
+    "sharer_id": "sharer1",
     "resource_id": "resource1",
     "group_id": "group1",
     "updateView": "assert"

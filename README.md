@@ -247,13 +247,13 @@ assert(resource_owned_by_person(resource1, person1)).
 - **Resource Shared With Person:** A relationship that indicates a resource is shared with a person.
 
 ```prolog
-assert(resource_shared_with_person(resource1, person1)).
+assert(resource_shared_with_person(sharer1, resource1, person1)).
 ```
 
 - **Resource Shared With Group:** A relationship that indicates a resource is shared with a group.
 
 ```prolog
-assert(resource_shared_with_group(resource1, group1)).
+assert(resource_shared_with_group(sharer1, resource1, group1)).
 ```
 
 - **Resource Contained In:** A relationship that links a resource to a folder.

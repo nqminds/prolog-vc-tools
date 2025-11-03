@@ -72,7 +72,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from resource_shared_with_group claim", () => {
     const result = extractPrologStatement(resourceSharedWithGroupVC);
     expect(result).toEqual({
-      fact: "assert(resource_shared_with_group(resource1, group1)).",
+      fact: "assert(resource_shared_with_group(sharer1, resource1, group1)).",
       type: ClaimType.ResourceSharedWithGroup,
     });
   });
@@ -88,7 +88,7 @@ describe("extractPrologStatement", () => {
   test("should extract prolog fact from resource_shared_with_person claim", () => {
     const result = extractPrologStatement(resourceSharedWithPersonVC);
     expect(result).toEqual({
-      fact: "assert(resource_shared_with_person(resource1, person1)).",
+      fact: "assert(resource_shared_with_person(sharer1, resource1, person1)).",
       type: ClaimType.ResourceSharedWithPerson,
     });
   });
