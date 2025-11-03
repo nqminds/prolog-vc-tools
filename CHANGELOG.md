@@ -1,5 +1,11 @@
 # prolog-vc-tools
 
+## 6.0.0
+
+### Major Changes
+
+- a1f1b68: Add sharer to sharing VCs
+
 ## 5.3.0
 
 ### Minor Changes
